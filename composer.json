@@ -1,0 +1,16 @@
+{
+    "name": "obelaw/framework",
+    "description": "This is Obelaw's framework for building modules",
+    "autoload": {
+        "psr-4": {
+            "Obelaw\\Framework\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Karim Mohamed",
+            "email": "komicho1996@gmail.com"
+        }
+    ],
+    "require": {}
+}
