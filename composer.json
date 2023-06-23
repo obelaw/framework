@@ -12,7 +12,9 @@
             "email": "komicho1996@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "ryangjchandler/blade-tabler-icons": "^2.0"
+    },
     "extra": {
         "laravel": {
             "providers": [

@@ -1,13 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Store\Dashboard\Http\Livewire\Account\LoginPage;
-use Store\Dashboard\Http\Livewire\Admin\Home as AdminHome;
-use Store\Dashboard\Http\Livewire\Admin\Permissions\Admins\AdminCreate;
-use Store\Dashboard\Http\Livewire\Admin\Permissions\Admins\AdminsIndex;
-use Store\Dashboard\Http\Livewire\Admin\Permissions\Admins\AdminUpdate;
-use Store\Dashboard\Http\Livewire\Home;
-use Store\Dashboard\Http\Middleware\GlobalConfigMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +13,10 @@ use Store\Dashboard\Http\Middleware\GlobalConfigMiddleware;
 |
  */
 
-
 Route::prefix('o')->group(function () {
     Route::get('/', function () {
-        return view('obelaw::layouts.dashboard');
+        return view('obelaw::home', [
+            'modules' => \Obelaw\Framework\Registrar::getListModules()
+        ]);
     })->name('obelaw.home');
 });

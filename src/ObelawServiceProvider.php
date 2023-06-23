@@ -4,6 +4,7 @@ namespace Obelaw\Framework;
 
 use Illuminate\Support\ServiceProvider;
 use Obelaw\Framework\Console\SetupCommand;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 class ObelawServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,8 @@ class ObelawServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 
+        $this->loadViewComponentsAs('obelaw', $this->viewComponents());
+
         if ($this->app->runningInConsole()) {
 
             $this->commands([
@@ -43,5 +46,12 @@ class ObelawServiceProvider extends ServiceProvider
 
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
+    }
+
+    private function viewComponents(): array
+    {
+        return [
+            DashboardLayout::class,
+        ];
     }
 }
