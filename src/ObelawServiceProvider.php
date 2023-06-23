@@ -3,6 +3,7 @@
 namespace Obelaw\Framework;
 
 use Illuminate\Support\ServiceProvider;
+use Obelaw\Framework\Console\SetupCommand;
 
 class ObelawServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,11 @@ class ObelawServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 
         if ($this->app->runningInConsole()) {
+
+            $this->commands([
+                SetupCommand::class,
+            ]);
+
             $this->publishes([
                 __DIR__ . '/../public/assets' => public_path('vendor/obelaw'),
             ], 'obelaw:assets');
