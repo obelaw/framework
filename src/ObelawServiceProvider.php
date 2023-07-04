@@ -4,6 +4,7 @@ namespace Obelaw\Framework;
 
 use Illuminate\Support\ServiceProvider;
 use Obelaw\Framework\Console\SetupCommand;
+use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 class ObelawServiceProvider extends ServiceProvider
@@ -52,6 +53,7 @@ class ObelawServiceProvider extends ServiceProvider
     {
         return [
             DashboardLayout::class,
+            FormBuilder::class,
         ];
     }
 }

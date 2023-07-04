@@ -8,7 +8,9 @@ class Registrar
 {
     public static $modules = [];
 
-    public static function module(string $id, array $info = [])
+    public static $forms = [];
+
+    public static function module(string $id, array $info = [], array $forms = [])
     {
         $module[$id] = [];
 
@@ -21,11 +23,17 @@ class Registrar
         ];
 
         static::$modules = array_merge(static::$modules, $module);
+
+        if (!empty($forms)) {
+            static::$forms = array_merge(static::$forms, $forms);
+        }
     }
 
     public static function setupModules()
     {
         Cache::forever('obelawModules', static::$modules);
+
+        Cache::forever('obelawForms', static::$forms);
     }
 
     public static function getModules()
@@ -49,5 +57,21 @@ class Registrar
     public static function getCountModules()
     {
         return count(static::getListModules());
+    }
+
+    public static function getForms($id = null)
+    {
+        $forms = Cache::get('obelawForms');
+
+        if ($id) {
+            return $forms[$id];
+        }
+
+        return $forms;
+    }
+
+    public static function getCountForms()
+    {
+        return count(static::getForms());
     }
 }
