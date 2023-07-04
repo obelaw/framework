@@ -10,7 +10,9 @@ class Registrar
 
     public static $forms = [];
 
-    public static function module(string $id, array $info = [], array $forms = [])
+    public static $navbars = [];
+
+    public static function module(string $id, array $info = [], array $navbar = [], array $forms = [])
     {
         $module[$id] = [];
 
@@ -27,6 +29,10 @@ class Registrar
         if (!empty($forms)) {
             static::$forms = array_merge(static::$forms, $forms);
         }
+
+        if (!empty($navbar)) {
+            static::$navbars = array_merge(static::$navbars, [$id => $navbar]);
+        }
     }
 
     public static function setupModules()
@@ -34,6 +40,8 @@ class Registrar
         Cache::forever('obelawModules', static::$modules);
 
         Cache::forever('obelawForms', static::$forms);
+
+        Cache::forever('obelawNavbars', static::$navbars);
     }
 
     public static function getModules()
@@ -73,5 +81,21 @@ class Registrar
     public static function getCountForms()
     {
         return count(static::getForms());
+    }
+
+    public static function getNavbars($id = null)
+    {
+        $navbars = Cache::get('obelawNavbars');
+
+        if ($id) {
+            return $navbars[$id];
+        }
+
+        return $navbars;
+    }
+
+    public static function getCountNavbar()
+    {
+        return count(static::getNavbars());
     }
 }
