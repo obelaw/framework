@@ -21,5 +21,6 @@ final class SetupCommand extends Command
         $this->line('<fg=white;bg=blue> OBELAW </> Number of modules: `' . Registrar::getCountModules() . '`.');
         $this->line('<fg=white;bg=blue> OBELAW </> Number of forms: `' . Registrar::getCountForms() . '`.');
         $this->line('<fg=white;bg=blue> OBELAW </> Number of navbar: `' . Registrar::getCountNavbar() . '`.');
+        $this->line('<fg=white;bg=blue> OBELAW </> Number of ACL (permissions): `' . Registrar::getCountACL() . '`.');
     }
 }

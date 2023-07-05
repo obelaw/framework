@@ -2,13 +2,15 @@
 
 namespace Obelaw\Framework;
 
-use Illuminate\Support\ServiceProvider;
+use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Builder\NavbarBuilder;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
+use Illuminate\Routing\Router;
+use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 
-class ObelawServiceProvider extends ServiceProvider
+class ObelawServiceProvider extends ServiceProviderBase
 {
 
     /**
@@ -26,9 +28,10 @@ class ObelawServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Router $router)
     {
         //
+        $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 

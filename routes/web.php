@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::prefix('o')->group(function () {
-    Route::get('/', function () {
-        return view('obelaw::home', [
-            'modules' => \Obelaw\Framework\Registrar::getListModules()
-        ]);
-    })->name('obelaw.home');
-});
+Route::get('/', function () {
+    return view('obelaw::home', [
+        'modules' => \Obelaw\Framework\Registrar::getListModules()
+    ]);
+})->name('obelaw.home');

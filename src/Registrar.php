@@ -12,7 +12,9 @@ class Registrar
 
     public static $navbars = [];
 
-    public static function module(string $id, array $info = [], array $navbar = [], array $forms = [])
+    public static $ACL = [];
+
+    public static function module(string $id, array $info = [], array $navbar = [], array $forms = [], array $ACL = [])
     {
         $module[$id] = [];
 
@@ -33,6 +35,10 @@ class Registrar
         if (!empty($navbar)) {
             static::$navbars = array_merge(static::$navbars, [$id => $navbar]);
         }
+
+        if (!empty($ACL)) {
+            static::$ACL = array_merge(static::$ACL, [$id => $ACL]);
+        }
     }
 
     public static function setupModules()
@@ -42,6 +48,8 @@ class Registrar
         Cache::forever('obelawForms', static::$forms);
 
         Cache::forever('obelawNavbars', static::$navbars);
+
+        Cache::forever('obelawACL', static::$ACL);
     }
 
     public static function getModules()
@@ -97,5 +105,21 @@ class Registrar
     public static function getCountNavbar()
     {
         return count(static::getNavbars());
+    }
+
+    public static function getACL($id = null)
+    {
+        $ACL = Cache::get('obelawACL');
+
+        if ($id) {
+            return $ACL[$id];
+        }
+
+        return $ACL;
+    }
+    
+    public static function getCountACL()
+    {
+        return count(static::getACL());
     }
 }
