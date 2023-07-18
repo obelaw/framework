@@ -27,6 +27,8 @@
             font-feature-settings: "cv03", "cv04", "cv11";
         }
     </style>
+
+    @livewireStyles
 </head>
 
 <body>
@@ -260,8 +262,8 @@
                             <span class="avatar avatar-sm"
                                 style="background-image: url(https://www.gravatar.com/avatar/)"></span>
                             <div class="d-none d-xl-block ps-2">
-                                <div>Paweł Kuna</div>
-                                <div class="mt-1 small text-muted">UI Designer</div>
+                                <div>{{ auth()->user()->name }}</div>
+                                <div class="mt-1 small text-muted">CTO</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -283,25 +285,6 @@
                     <div class="navbar">
                         <div class="container-xl">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./">
-                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                            <!-- Download SVG icon from http://tabler-icons.io/i/home -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                                                height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                stroke="currentColor" fill="none" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                                            </svg>
-                                        </span>
-                                        <span class="nav-link-title">
-                                            Home
-                                        </span>
-                                    </a>
-                                </li>
                                 {{ $nav ?? null }}
                             </ul>
                         </div>
@@ -323,7 +306,7 @@
                                         class="link-secondary">License</a></li>
                                 <li class="list-inline-item"><a href="https://github.com/tabler/tabler"
                                         target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                                <li class="list-inline-item">
+                                {{-- <li class="list-inline-item">
                                     <a href="https://github.com/sponsors/codecalm" target="_blank"
                                         class="link-secondary" rel="noopener">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
@@ -338,19 +321,19 @@
                                         </svg>
                                         Sponsor
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; 2023
-                                    <a href="." class="link-secondary">Tabler</a>.
+                                    <a href="." class="link-secondary">Obelaw</a>.
                                     All rights reserved.
                                 </li>
                                 <li class="list-inline-item">
                                     <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0.0-beta19
+                                        v1.0
                                     </a>
                                 </li>
                             </ul>
@@ -363,5 +346,6 @@
 </body>
 
 <script src="{{ asset('/vendor/obelaw/tabler.min.js') }}"></script>
-
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+@livewireScripts
 </html>

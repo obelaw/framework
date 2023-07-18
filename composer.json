@@ -13,7 +13,8 @@
         }
     ],
     "require": {
-        "ryangjchandler/blade-tabler-icons": "^2.0"
+        "ryangjchandler/blade-tabler-icons": "^2.0",
+        "livewire/livewire": "^2.12"
     },
     "extra": {
         "laravel": {
