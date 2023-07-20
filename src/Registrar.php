@@ -3,6 +3,7 @@
 namespace Obelaw\Framework;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Modules\FormsManagement;
 
 class Registrar
 {
@@ -14,9 +15,11 @@ class Registrar
 
     public static $ACL = [];
 
-    public static function module(string $id, array $info = [], array $navbar = [], array $forms = [], array $ACL = [])
+    public static function module(string $id, string $root, array $info = [], array $navbar = [], array $ACL = [])
     {
         $module[$id] = [];
+
+        $module[$id]['root'] = $root;
 
         $module[$id]['info'] = [
             'name' => $info['name'] ?? 'Module',
@@ -27,10 +30,6 @@ class Registrar
         ];
 
         static::$modules = array_merge(static::$modules, $module);
-
-        if (!empty($forms)) {
-            static::$forms = array_merge(static::$forms, $forms);
-        }
 
         if (!empty($navbar)) {
             static::$navbars = array_merge(static::$navbars, [$id => $navbar]);
@@ -43,9 +42,9 @@ class Registrar
 
     public static function setupModules()
     {
-        Cache::forever('obelawModules', static::$modules);
+        FormsManagement::manage(static::$modules);
 
-        Cache::forever('obelawForms', static::$forms);
+        Cache::forever('obelawModules', static::$modules);
 
         Cache::forever('obelawNavbars', static::$navbars);
 
@@ -117,7 +116,7 @@ class Registrar
 
         return $ACL;
     }
-    
+
     public static function getCountACL()
     {
         return count(static::getACL());

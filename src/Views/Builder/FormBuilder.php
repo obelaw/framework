@@ -2,10 +2,9 @@
 
 namespace Obelaw\Framework\Views\Builder;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use Obelaw\Framework\Form\Fields;
-use Obelaw\Framework\Registrar;
 
 class FormBuilder extends Component
 {
@@ -25,8 +24,7 @@ class FormBuilder extends Component
         $this->method = $method;
         $this->action = $action;
 
-        $formClass = Registrar::getForms($id);
-        $this->fields = (new $formClass)->form(new Fields);
+        $this->fields = Cache::get('obelawForms')[$id];
     }
 
     /**
