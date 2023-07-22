@@ -2,12 +2,12 @@
 
 namespace Obelaw\Framework\ACL\Traits;
 
-use Obelaw\Framework\ACL\Models\UserRule;
+use Obelaw\Framework\ACL\Models\AdminRule;
 
 trait HasACL
 {
     public function rule()
     {
-        return $this->hasOne(UserRule::class, 'user_id', 'id');
+        return $this->hasOne(AdminRule::class, 'admin_id', 'id');
     }
 }

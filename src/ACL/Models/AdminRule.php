@@ -4,7 +4,7 @@ namespace Obelaw\Framework\ACL\Models;
 
 use Obelaw\Framework\Base\ModelBase;
 
-class UserRule extends ModelBase
+class AdminRule extends ModelBase
 {
     /**
      * The attributes that are mass assignable.
@@ -12,7 +12,7 @@ class UserRule extends ModelBase
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
+        'admin_id',
         'rule_id',
     ];
 

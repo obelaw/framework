@@ -15,7 +15,7 @@ abstract class ServiceProviderBase extends ServiceProvider
      */
     protected function loadRoutesFrom($path)
     {
-        Route::middleware(['web', 'auth'])
+        Route::middleware(['web', 'obelawPermission'])
             ->prefix('obelaw')
             ->group(function () use ($path) {
                 parent::loadRoutesFrom($path);

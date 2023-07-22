@@ -2,13 +2,18 @@
 
 namespace Obelaw\Framework;
 
+use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
+use Livewire\Livewire;
+use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
+use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
+use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Builder\NavbarBuilder;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
-use Illuminate\Routing\Router;
-use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 
 class ObelawServiceProvider extends ServiceProviderBase
 {
@@ -20,7 +25,19 @@ class ObelawServiceProvider extends ServiceProviderBase
      */
     public function register()
     {
-        //
+        config([
+            'auth.guards.obelaw' => array_merge([
+                'driver' => 'session',
+                'provider' => 'obelaw',
+            ], config('auth.guards.store', [])),
+        ]);
+
+        config([
+            'auth.providers.obelaw' => array_merge([
+                'driver' => 'eloquent',
+                'model' => \Obelaw\Framework\ACL\Models\Admin::class,
+            ], config('auth.providers.obelaw', [])),
+        ]);
     }
 
     /**
@@ -42,6 +59,7 @@ class ObelawServiceProvider extends ServiceProviderBase
         if ($this->app->runningInConsole()) {
 
             $this->commands([
+                InstallCommand::class,
                 SetupCommand::class,
             ]);
 
@@ -51,6 +69,14 @@ class ObelawServiceProvider extends ServiceProviderBase
 
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
+
+        View::composer('*', function ($view) {
+            if ($user = Auth::guard('obelaw')->user()) {
+                $view->with('admin', $user);
+            }
+        });
+
+        Livewire::component('obelaw-auth-login', LoginPage::class);
     }
 
     private function viewComponents(): array

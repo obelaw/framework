@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Obelaw\Framework\Livewire\Auth\LoginPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+Route::get('/login', LoginPage::class)->withoutMiddleware('obelawPermission')->name('obelaw.admin.login');
 
 Route::get('/', function () {
     return view('obelaw::home', [

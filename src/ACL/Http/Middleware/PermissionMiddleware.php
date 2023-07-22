@@ -18,8 +18,10 @@ class PermissionMiddleware
      */
     public function handle(Request $request, Closure $next, $permission = false)
     {
-        Permission::verify($permission);
+        abort_if(!auth()->guard('obelaw')->check(), redirect(route('obelaw.admin.login')));
 
-        return $next($request);
+        if (Permission::verify($permission)) {
+            return $next($request);
+        }
     }
 }
