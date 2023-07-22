@@ -11,6 +11,7 @@ use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
+use Obelaw\Framework\Views\Builder\Form\SelectField;
 use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Builder\NavbarBuilder;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
@@ -85,6 +86,8 @@ class ObelawServiceProvider extends ServiceProviderBase
             DashboardLayout::class,
             FormBuilder::class,
             NavbarBuilder::class,
+
+            SelectField::class,
         ];
     }
 }
