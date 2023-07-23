@@ -4,6 +4,7 @@ namespace Obelaw\Framework;
 
 use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Modules\FormsManagement;
+use Obelaw\Framework\Modules\GridsManagement;
 
 class Registrar
 {
@@ -43,6 +44,8 @@ class Registrar
     public static function setupModules()
     {
         FormsManagement::manage(static::$modules);
+
+        GridsManagement::manage(static::$modules);
 
         Cache::forever('obelawModules', static::$modules);
 
