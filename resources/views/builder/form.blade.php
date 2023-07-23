@@ -15,6 +15,11 @@
                 <x-obelaw-select-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :options="$field['options']"
                     :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" :multiple="$field['multiple']" />
             @endif
+
+            @if ($field['type'] == 'textarea')
+                <x-obelaw-textarea-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :hint="$field['hint']"
+                    :required="str_contains($field['rules'], 'required')" />
+            @endif
         @endforeach
 
     </div>

@@ -12,6 +12,7 @@ use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Views\Builder\Form\SelectField;
+use Obelaw\Framework\Views\Builder\Form\TextareaField;
 use Obelaw\Framework\Views\Builder\Form\TextField;
 use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Builder\NavbarBuilder;
@@ -90,6 +91,7 @@ class ObelawServiceProvider extends ServiceProviderBase
 
             TextField::class,
             SelectField::class,
+            TextareaField::class,
         ];
     }
 }
