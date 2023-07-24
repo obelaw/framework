@@ -9,6 +9,7 @@ class Table
     public $bottoms = null;
     public $setCTAs = null;
     public $model = null;
+    public $filter = null;
     public $links = null;
 
     public function __construct($model)
@@ -16,10 +17,10 @@ class Table
         $this->model = $model;
     }
 
-    public function addColumn($label, $dataKey)
+    public function addColumn($label, $dataKey, $filter = null)
     {
         array_push($this->labels, $label);
-        array_push($this->dataKeys, $dataKey);
+        array_push($this->dataKeys, ['key' => $dataKey, 'filter' => $filter]);
 
         return $this;
     }
@@ -49,19 +50,28 @@ class Table
         return $this->links;
     }
 
+    public function initFilter($filterClass)
+    {
+        if ($filterClass) {
+            $this->filter = new $filterClass;
+        }
+    }
+
     public function getRows()
     {
         $model = (new $this->model)->paginate(25);
 
         $this->links = $model->links();
 
-        return $model->map(function ($column) {
+        return $model->map(function ($row) {
             $rows = [];
 
-            $rows['primary'] = $column->id;
+            $rows['primary'] = $row->id;
 
-            foreach ($this->getDataKeys() as $key) {
-                $rows['columns'][] = $column->{$key};
+            foreach ($this->getDataKeys() as $column) {
+                $rows['columns'][] = (!is_null($column['filter'])) ?
+                    call_user_func_array([$this->filter, $column['filter']], [$row->{$column['key']}]) :
+                    $row->{$column['key']};
             }
 
             $rows['calls'] = $this->setCTAs;

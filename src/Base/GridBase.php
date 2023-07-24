@@ -25,11 +25,12 @@ abstract class GridBase extends Component
 
         $gridBuild->setBottoms($grid['bottoms']);
 
-        foreach ($grid['rows'] as $key => $value) {
-            $gridBuild->addColumn($key, $value);
+        foreach ($grid['rows'] as $row) {
+            $gridBuild->addColumn($row['label'], $row['dataKey'], $row['filter']);
         }
 
         $gridBuild->setCTAs($grid['CTAs']);
+        $gridBuild->initFilter($grid['filter']);
 
         $this->grid = $gridBuild;
     }

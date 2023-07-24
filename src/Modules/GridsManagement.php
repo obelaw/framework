@@ -36,6 +36,7 @@ class GridsManagement
 
                     $_grid[$id . '_' . basename($filename, '.php')] = [
                         'model' => $gridClass->model(),
+                        'filter' => (method_exists($gridClass, 'filter')) ? $gridClass->filter() : null,
                         'bottoms' => $bottom->getBottoms(),
                         'rows' => $table->getColumns(),
                         'CTAs' => $CTA->getCalls(),

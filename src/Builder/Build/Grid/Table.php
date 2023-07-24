@@ -6,9 +6,15 @@ class Table
 {
     public $columns = [];
 
-    public function setColumn($label, $dataKey)
+    public function setColumn($label, $dataKey, $filter = null)
     {
-        $this->columns = array_merge($this->columns, [$label => $dataKey]);
+        $column = [
+            'label' => $label,
+            'dataKey' => $dataKey,
+            'filter' => $filter,
+        ];
+
+        array_push($this->columns, $column);
 
         return $this;
     }
