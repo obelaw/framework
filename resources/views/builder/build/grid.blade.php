@@ -49,22 +49,27 @@
                                         @foreach ($grid->getLabels() as $label)
                                             <th>{{ $label }}</th>
                                         @endforeach
-                                        <th class="w-1"></th>
+                                        <th width="15%" ></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($grid->getRows() as $row)
                                         <tr>
                                             @foreach ($row['columns'] as $column)
-                                                <td>{{ $column }}</td>
+                                                <td>{!! $column !!}</td>
                                             @endforeach
-                                            <td>
+                                            <td align="right">
                                                 @foreach ($row['calls'] as $call => $action)
                                                     @if ($action['type'] == 'route')
-                                                        <a
+                                                        <a class="btn btn-sm btn-{{ $action['color'] ?? 'primary' }}"
                                                             href="{{ route($action['route'], [$row['primary']]) }}">{{ $call }}</a>
                                                     @endif
                                                 @endforeach
+
+                                                @if ($canRemoveRow)
+                                                    <button class="btn btn-sm btn-danger"
+                                                        wire:click="removeRow({{ $row['primary'] }})">Remove</button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

@@ -51,6 +51,7 @@ abstract class GridBase extends Component
             'pretitle' => $this->pretitle,
             'title' => $this->title,
             'grid' => $this->grid,
+            'canRemoveRow' => method_exists($this, 'removeRow'),
         ])->layout($this->layout());
     }
 
