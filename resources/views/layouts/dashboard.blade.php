@@ -16,6 +16,7 @@
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
     <link href="{{ asset('/vendor/obelaw/tabler.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.css" integrity="sha512-yX1R8uWi11xPfY7HDg7rkLL/9F1jq8Hyiz8qF4DV2nedX4IVl7ruR2+h3TFceHIcT5Oq7ooKi09UZbI39B7ylw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -343,6 +344,11 @@
 
 <script src="{{ asset('/vendor/obelaw/tabler.min.js') }}"></script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 @livewireScripts
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.js" integrity="sha512-zHKwhWCHqpmDbi6d/5Fnuwr7JKmzmpXErmoVE0OX2i0TRLlJy+19j1YzRRzD/CnpjGMSD3P0XVo+ca6v4tbn4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+<x-livewire-alert::flash />
 
 </html>

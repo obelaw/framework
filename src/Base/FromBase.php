@@ -4,9 +4,12 @@ namespace Obelaw\Framework\Base;
 
 use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 abstract class FromBase extends Component
 {
+    use LivewireAlert;
+
     private $fields = [];
 
     public function boot()
@@ -37,5 +40,15 @@ abstract class FromBase extends Component
     protected function layout()
     {
         //
+    }
+
+    protected function psuhAlert($type = 'success', $massage)
+    {
+        $this->alert($type, $massage, [
+            'position' => 'top-end',
+            'timer' => 5000,
+            'toast' => true,
+            'timerProgressBar' => true,
+        ]);
     }
 }
