@@ -16,6 +16,7 @@ use Obelaw\Framework\Views\Builder\Form\TextareaField;
 use Obelaw\Framework\Views\Builder\Form\TextField;
 use Obelaw\Framework\Views\Builder\FormBuilder;
 use Obelaw\Framework\Views\Builder\NavbarBuilder;
+use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 class ObelawServiceProvider extends ServiceProviderBase
@@ -88,6 +89,8 @@ class ObelawServiceProvider extends ServiceProviderBase
             DashboardLayout::class,
             FormBuilder::class,
             NavbarBuilder::class,
+
+            Amount::class,
 
             TextField::class,
             SelectField::class,
