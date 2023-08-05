@@ -10,6 +10,7 @@ use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
+use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Views\Builder\Form\SelectField;
 use Obelaw\Framework\Views\Builder\Form\TextareaField;
@@ -53,6 +54,7 @@ class ObelawServiceProvider extends ServiceProviderBase
     {
         //
         $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
+        $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 

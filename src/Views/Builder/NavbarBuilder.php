@@ -4,6 +4,7 @@ namespace Obelaw\Framework\Views\Builder;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
+use Obelaw\Framework\Pipeline\Identification\Identifier;
 use Obelaw\Framework\Registrar;
 
 class NavbarBuilder extends Component
@@ -19,6 +20,10 @@ class NavbarBuilder extends Component
      */
     public function __construct($id = null)
     {
+        if ($module = Identifier::getModule()) {
+            $id = $module['id'];
+        }
+
         if (is_null($id)) {
             throw new \Exception('You must select the module id to show a navbar');
         }
