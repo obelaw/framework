@@ -1,13 +1,5 @@
 <!doctype html>
-<!--
-* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
-* @version 1.0.0-beta19
-* @link https://tabler.io
-* Copyright 2018-2023 The Tabler Authors
-* Copyright 2018-2023 codecalm.net Paweł Kuna
-* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
--->
-<html lang="en">
+<html lang="en" dir="{{ $dir }}">
 
 <head>
     <meta charset="utf-8" />
@@ -15,8 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Dashboard - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="{{ asset('/vendor/obelaw/tabler.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.css" integrity="sha512-yX1R8uWi11xPfY7HDg7rkLL/9F1jq8Hyiz8qF4DV2nedX4IVl7ruR2+h3TFceHIcT5Oq7ooKi09UZbI39B7ylw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    @if ($dir == 'ltr')
+        <link href="{{ asset('/vendor/obelaw/tabler.min.css') }}" rel="stylesheet" />
+    @endif
+
+    @if ($dir == 'rtl')
+        <link href="{{ asset('/vendor/obelaw/tabler.rtl.min.css') }}" rel="stylesheet" />
+    @endif
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.css"
+        integrity="sha512-yX1R8uWi11xPfY7HDg7rkLL/9F1jq8Hyiz8qF4DV2nedX4IVl7ruR2+h3TFceHIcT5Oq7ooKi09UZbI39B7ylw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -33,7 +35,6 @@
 </head>
 
 <body>
-    <script src="./dist/js/demo-theme.min.js?1684106062"></script>
     <div class="page">
         <!-- Navbar -->
         <header class="navbar navbar-expand-md d-print-none" data-bs-theme="dark">
@@ -65,7 +66,7 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        Home
+                                        {{ __('obelaw::layout.home') }}
                                     </span>
                                 </a>
                             </li>
@@ -84,14 +85,14 @@
                                         </svg>
                                     </span>
                                     <span class="nav-link-title">
-                                        Modules
+                                        {{ __('obelaw::layout.modules') }}
                                     </span>
                                 </a>
                                 <div class="dropdown-menu">
                                     @foreach ($modules as $module)
                                         <a class="dropdown-item" href="{{ route($module['href']) }}">
                                             @svg('tabler-' . $module['icon'], 'me-1')
-                                            {{ $module['name'] }}
+                                            {{ \Illuminate\Support\Str::contains($module['name'], '::') ? __($module['name']) : $module['name'] }}
                                         </a>
                                     @endforeach
                                 </div>
@@ -260,7 +261,7 @@
                                 style="background-image: url(https://www.gravatar.com/avatar/)"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ $admin->name }}</div>
-                                <div class="mt-1 small text-muted">CTO</div>
+                                <div class="mt-1 small text-muted">{{ $admin->rule->permission->name }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -269,7 +270,7 @@
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                            <a href="./sign-in.html" class="dropdown-item">{{ __('obelaw::layout.logout') }}</a>
                         </div>
                     </div>
                 </div>
@@ -282,6 +283,64 @@
                     <div class="navbar">
                         <div class="container-xl">
                             <ul class="navbar-nav">
+
+                                @if (isset($_module))
+                                    <li class="nav-item opacity-50">
+                                        <a class="nav-link">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                @if (isset($_module['icon']))
+                                                    @svg('tabler-' . $_module['icon'], 'icon')
+                                                @else
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-face-id" width="24"
+                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                                                        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                                                        <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                                                        <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                                                        <path d="M9 10l.01 0"></path>
+                                                        <path d="M15 10l.01 0"></path>
+                                                        <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+                                                    </svg>
+                                                @endif
+                                            </span>
+                                            <span class="nav-link-title">
+                                                {{ \Illuminate\Support\Str::contains($_module['name'], '::') ? __($_module['name']) : $_module['name'] }}
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item opacity-50">
+                                        <a class="nav-link">
+                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                                @if ($dir == 'ltr')
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-chevron-compact-right"
+                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                        stroke-width="2" stroke="currentColor" fill="none"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M11 4l3 8l-3 8"></path>
+                                                    </svg>
+                                                @endif
+
+                                                @if ($dir == 'rtl')
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="icon icon-tabler icon-tabler-chevron-compact-left"
+                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                        stroke-width="2" stroke="currentColor" fill="none"
+                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <path d="M13 20l-3 -8l3 -8"></path>
+                                                    </svg>
+                                                @endif
+                                            </span>
+                                        </a>
+                                    </li>
+                                @endif
+
                                 {{ $nav ?? null }}
                             </ul>
                         </div>
@@ -343,12 +402,15 @@
 </body>
 
 <script src="{{ asset('/vendor/obelaw/tabler.min.js') }}"></script>
+<script src="https://tabler.io/demo/dist/js/demo.min.js" defer></script>
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 @livewireScripts
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.js" integrity="sha512-zHKwhWCHqpmDbi6d/5Fnuwr7JKmzmpXErmoVE0OX2i0TRLlJy+19j1YzRRzD/CnpjGMSD3P0XVo+ca6v4tbn4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.19/sweetalert2.min.js"
+    integrity="sha512-zHKwhWCHqpmDbi6d/5Fnuwr7JKmzmpXErmoVE0OX2i0TRLlJy+19j1YzRRzD/CnpjGMSD3P0XVo+ca6v4tbn4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ asset('vendor/livewire-alert/livewire-alert.js') }}"></script>
 <x-livewire-alert::flash />
 
 </html>

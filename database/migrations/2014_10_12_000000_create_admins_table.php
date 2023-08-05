@@ -17,6 +17,7 @@ return new class extends MigrationBase
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->string('lang', 2)->default('en');
             $table->timestamps();
         });
     }

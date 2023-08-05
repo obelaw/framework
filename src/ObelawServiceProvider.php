@@ -60,6 +60,8 @@ class ObelawServiceProvider extends ServiceProviderBase
 
         $this->loadViewComponentsAs('obelaw', $this->viewComponents());
 
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'obelaw');
+
         if ($this->app->runningInConsole()) {
 
             $this->commands([

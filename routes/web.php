@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 
 /*
@@ -14,7 +15,7 @@ use Obelaw\Framework\Livewire\Auth\LoginPage;
 |
  */
 
-Route::get('/login', LoginPage::class)->withoutMiddleware('obelawPermission')->name('obelaw.admin.login');
+Route::get('/login', LoginPage::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.login');
 
 Route::get('/', function () {
     return view('obelaw::home', [

@@ -27,7 +27,9 @@
                                 <p class="m-0">
                                     @svg('tabler-' . $module['icon'], 'w-7 h-7')
                                 </p>
-                                <p class="m-0 mt-3 h3">{{ $module['name'] }}</p>
+                                <p class="m-0 mt-3 h3">
+                                    {{ \Illuminate\Support\Str::contains($module['name'], '::') ? __($module['name']) : $module['name'] }}
+                                </p>
                             </div>
                         </a>
                     </div>
