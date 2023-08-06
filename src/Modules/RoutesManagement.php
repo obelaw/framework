@@ -37,7 +37,7 @@ class RoutesManagement
                 if (!is_array($action)) {
                     static::setRoute(
                         id: $routes['id'],
-                        name: $prefix . '.' . $uri,
+                        name: $prefix . '.' . static::handlePerma($uri),
                         uri: $prefix . '/' . $uri,
                         action: $action,
                     );
@@ -47,7 +47,7 @@ class RoutesManagement
                     foreach ($action as $_uri => $_action) {
                         static::setRoute(
                             id: $routes['id'],
-                            name: $prefix . '.' . $uri . '.' . $_uri,
+                            name: $prefix . '.' . $uri . '.' . static::handlePerma($_uri),
                             uri: $prefix . '/' . $uri . '/' . $_uri,
                             action: $_action,
                         );
@@ -66,5 +66,12 @@ class RoutesManagement
     public static function listRoutes()
     {
         return Cache::get('obelawRoutes', []);
+    }
+
+    public static function handlePerma($prama)
+    {
+        $prama = preg_replace('/{[\s\S]+?}/', '', $prama);
+        $prama = str_replace('/', '', $prama);
+        return $prama;
     }
 }
