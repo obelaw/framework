@@ -25,6 +25,11 @@
                 <x-obelaw-date-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :hint="$field['hint']"
                     :required="str_contains($field['rules'], 'required')" />
             @endif
+
+            @if ($field['type'] == 'checkbox')
+                <x-obelaw-checkbox-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :hint="$field['hint']"
+                    :required="str_contains($field['rules'], 'required')" />
+            @endif
         @endforeach
 
     </div>

@@ -16,8 +16,9 @@ class Fields
             'file' => $this->handleFile($attributes),
             'date' => $this->handleDate($attributes),
             'select' => $this->handleSelect($attributes),
+            'checkbox' => $this->handleCheckbox($attributes),
         };
-
+        
         $this->fields[] = $attributes;
     }
 
@@ -71,6 +72,12 @@ class Fields
 
         $attributes['type'] = 'select';
         $attributes['multiple'] = $attributes['multiple'] ?? false;
+        return $this->falterAttributes($attributes);
+    }
+
+    private function handleCheckbox($attributes)
+    {
+        $attributes['type'] = 'checkbox';
         return $this->falterAttributes($attributes);
     }
 
