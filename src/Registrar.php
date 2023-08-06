@@ -5,6 +5,7 @@ namespace Obelaw\Framework;
 use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Modules\FormsManagement;
 use Obelaw\Framework\Modules\GridsManagement;
+use Obelaw\Framework\Modules\RoutesManagement;
 
 class Registrar
 {
@@ -14,9 +15,11 @@ class Registrar
 
     public static $navbars = [];
 
+    public static $routes = [];
+
     public static $ACL = [];
 
-    public static function module(string $id, string $root, array $info = [], array $navbar = [], array $ACL = [])
+    public static function module(string $id, string $root, array $info = [], array $navbar = [], array $routes = [], array $ACL = [])
     {
         $module[$id] = [];
 
@@ -26,6 +29,7 @@ class Registrar
             'name' => $info['name'] ?? 'Module',
             'icon' => $info['icon'] ?? 'puzzle',
             'href' => $info['href'] ?? '#',
+            'slug' => $info['slug'] ?? $id,
             'description' => $info['description'] ?? null,
             'rule' => $info['rule'] ?? '*',
         ];
@@ -34,6 +38,13 @@ class Registrar
 
         if (!empty($navbar)) {
             static::$navbars = array_merge(static::$navbars, [$id => $navbar]);
+        }
+
+        if (!empty($routes)) {
+            static::$routes = array_merge(static::$routes, [
+                'id' => $id,
+                'group' => [$module[$id]['info']['slug'] => $routes],
+            ]);
         }
 
         if (!empty($ACL)) {
@@ -46,6 +57,8 @@ class Registrar
         FormsManagement::manage(static::$modules);
 
         GridsManagement::manage(static::$modules);
+
+        RoutesManagement::manage(static::$routes);
 
         Cache::forever('obelawModules', static::$modules);
 

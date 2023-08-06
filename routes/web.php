@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
+use Obelaw\Framework\Modules\RoutesManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,11 @@ Route::get('/', function () {
         'modules' => \Obelaw\Framework\Registrar::getListModules()
     ]);
 })->name('obelaw.home');
+
+foreach (RoutesManagement::listRoutes() as $id => $routes) {
+    Route::middleware(['obelawIdentifier:' . $id])->group(function () use ($routes) {
+        foreach ($routes as $route) {
+            Route::get($route['uri'], $route['action'])->name($route['name']);
+        }
+    });
+}
