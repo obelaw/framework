@@ -1,6 +1,6 @@
 <?php
 
-namespace Obelaw\Framework\Form;
+namespace Obelaw\Framework\Builder\Form;
 
 use Exception;
 

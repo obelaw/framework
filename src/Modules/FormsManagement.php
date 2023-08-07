@@ -3,7 +3,7 @@
 namespace Obelaw\Framework\Modules;
 
 use Illuminate\Support\Facades\Cache;
-use Obelaw\Framework\Form\Fields;
+use Obelaw\Framework\Builder\Form\Fields;
 
 class FormsManagement
 {
@@ -14,11 +14,17 @@ class FormsManagement
         foreach ($modules as $id => $data) {
             $_form = [];
 
-            if (is_dir($data['root'] . '/forms')) {
-                foreach (glob($data['root'] . '/forms/*.php') as $filename) {
+            if (is_dir($data['root'] . DIRECTORY_SEPARATOR . 'forms')) {
+                foreach (glob($data['root'] . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . '*.php') as $filename) {
                     $formClass = include($filename);
-                    $_form[$id . '_' . basename($filename, '.php')] = (new $formClass)->form(new Fields);
+
+                    $fields = new Fields;
+
+                    (new $formClass)->form($fields);
+
+                    $_form[$id . '_' . basename($filename, '.php')] = $fields->getFields();
                 }
+
                 $outForms = array_merge($outForms, $_form);
             }
         }
