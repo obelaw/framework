@@ -23,7 +23,7 @@ class Registrar
     {
         $module[$id] = [];
 
-        $module[$id]['root'] = $root;
+        $module[$id]['root'] = $root . DIRECTORY_SEPARATOR . 'etc';
 
         $module[$id]['info'] = [
             'name' => $info['name'] ?? 'Module',
