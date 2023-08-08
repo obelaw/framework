@@ -21,7 +21,7 @@
                     @endif
                 </span>
                 <span class="nav-link-title">
-                    {{ $link['label'] }}
+                    {{ \Illuminate\Support\Str::contains($link['label'], '::navbar') ? __($link['label']) : $link['label'] }}
                 </span>
             </a>
         </li>
@@ -50,7 +50,7 @@
                     @endif
                 </span>
                 <span class="nav-link-title">
-                    {{ $link['label'] }}
+                    {{ \Illuminate\Support\Str::contains($link['label'], '::navbar') ? __($link['label']) : $link['label'] }}
                 </span>
             </a>
             <div class="dropdown-menu">
@@ -59,7 +59,7 @@
                         @if (isset($_link['icon']))
                             @svg('tabler-' . $_link['icon'], 'icon me-1')
                         @endif
-                        {{ $_link['label'] }}
+                        {{ \Illuminate\Support\Str::contains($_link['label'], '::navbar') ? __($_link['label']) : $_link['label'] }}
                     </a>
                 @endforeach
             </div>

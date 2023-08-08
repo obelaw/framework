@@ -26,7 +26,7 @@
                                         <path d="M12 5l0 14" />
                                         <path d="M5 12l14 0" />
                                     </svg>
-                                    {{ $bottom['label'] }}
+                                    {{ \Illuminate\Support\Str::contains($bottom['label'], '::grids') ? __($bottom['label']) : $bottom['label'] }}
                                 </a>
                             @endforeach
                         @endempty
@@ -49,7 +49,7 @@
                                         @foreach ($grid->getLabels() as $label)
                                             <th>{{ $label }}</th>
                                         @endforeach
-                                        <th width="15%" ></th>
+                                        <th width="15%"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +62,9 @@
                                                 @foreach ($row['calls'] as $call => $action)
                                                     @if ($action['type'] == 'route')
                                                         <a class="btn btn-sm btn-{{ $action['color'] ?? 'primary' }}"
-                                                            href="{{ route($action['route'], [$row['primary']]) }}">{{ $call }}</a>
+                                                            href="{{ route($action['route'], [$row['primary']]) }}">
+                                                            {{ \Illuminate\Support\Str::contains($call, '::grids') ? __($call) : $call }}
+                                                        </a>
                                                     @endif
                                                 @endforeach
 

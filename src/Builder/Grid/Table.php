@@ -2,6 +2,8 @@
 
 namespace Obelaw\Framework\Builder\Grid;
 
+use Illuminate\Support\Str;
+
 class Table
 {
     public $labels = [];
@@ -19,7 +21,7 @@ class Table
 
     public function addColumn($label, $dataKey, $filter = null)
     {
-        array_push($this->labels, $label);
+        array_push($this->labels, Str::contains($label, '::grids') ? __($label) : $label);
         array_push($this->dataKeys, ['key' => $dataKey, 'filter' => $filter]);
 
         return $this;

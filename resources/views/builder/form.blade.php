@@ -1,7 +1,7 @@
 <form class="card" wire:submit.prevent="submit">
     @csrf
     <div class="card-header">
-        <h3 class="card-title">Horizontal form</h3>
+        <h3 class="card-title">Form</h3>
     </div>
     <div class="card-body">
 

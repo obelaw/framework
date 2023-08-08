@@ -35,22 +35,21 @@ abstract class GridBase extends Component
         $this->grid = $gridBuild;
     }
 
-    protected function rules()
+    public function preTitle()
     {
-        $data = [];
+        return $this->pretitle;
+    }
 
-        foreach ($this->fields as $field) {
-            $data[$field['model']] = $field['rules'];
-        }
-
-        return $data;
+    public function title()
+    {
+        return $this->title;
     }
 
     public function render()
     {
         return view('obelaw::builder.build.grid', [
-            'pretitle' => $this->pretitle,
-            'title' => $this->title,
+            'pretitle' => $this->preTitle(),
+            'title' => $this->title(),
             'grid' => $this->grid,
             'canRemoveRow' => method_exists($this, 'removeRow'),
         ])->layout($this->layout());

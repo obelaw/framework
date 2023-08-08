@@ -10,6 +10,9 @@ abstract class FromBase extends Component
 {
     use LivewireAlert;
 
+    protected $pretitle = 'Pre Title';
+    protected $title = 'Title';
+
     private $fields = [];
 
     public function boot()
@@ -19,6 +22,16 @@ abstract class FromBase extends Component
         foreach ($this->fields as $field) {
             $this->{$field['model']} = $field['value'] ?? null;
         }
+    }
+
+    public function preTitle()
+    {
+        return $this->pretitle;
+    }
+
+    public function title()
+    {
+        return $this->title;
     }
 
     protected function rules()
@@ -34,7 +47,10 @@ abstract class FromBase extends Component
 
     public function render()
     {
-        return view('obelaw::layouts.form')->layout($this->layout());
+        return view('obelaw::builder.build.form', [
+            'pretitle' => $this->preTitle(),
+            'title' => $this->title(),
+        ])->layout($this->layout());
     }
 
     protected function layout()

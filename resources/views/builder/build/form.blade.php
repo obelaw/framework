@@ -6,10 +6,10 @@
                 <div class="col">
                     <!-- Page pre-title -->
                     <div class="page-pretitle">
-                        Obelaw Catalog
+                        {{ $pretitle }}
                     </div>
                     <h2 class="page-title">
-                        Product create
+                        {{ $title }}
                     </h2>
                 </div>
             </div>
