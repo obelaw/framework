@@ -10,8 +10,10 @@ use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
-use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
+use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
+use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
+use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Views\Builder\Form\CheckboxField;
 use Obelaw\Framework\Views\Builder\Form\DateField;
 use Obelaw\Framework\Views\Builder\Form\SelectField;
@@ -45,6 +47,8 @@ class ObelawServiceProvider extends ServiceProviderBase
                 'model' => \Obelaw\Framework\ACL\Models\Admin::class,
             ], config('auth.providers.obelaw', [])),
         ]);
+
+        Languages::setLanguage('ar', 'العربية');
     }
 
     /**
@@ -87,6 +91,7 @@ class ObelawServiceProvider extends ServiceProviderBase
         });
 
         Livewire::component('obelaw-auth-login', LoginPage::class);
+        Livewire::component('obelaw-account-settings', SettingsPage::class);
     }
 
     private function viewComponents(): array
