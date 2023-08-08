@@ -19,7 +19,7 @@
     <div class="page-body">
         <div class="container-xl">
 
-            <div class="row row-cols-5 g-5">
+            <div class="row row-cols-5 g-5 mb-5">
                 <div class="col-md-4">
                     <h2 class="page-title mb-3">{{ __('obelaw::settings.language') }}</h2>
                     <p>{{ __('obelaw::settings.language_desc') }}</p>
@@ -31,7 +31,8 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3 row">
-                                <label class="col-3 col-form-label">{{ __('obelaw::settings.language') }}</label>
+                                <label
+                                    class="col-3 col-form-label required">{{ __('obelaw::settings.language') }}</label>
                                 <div class="col">
                                     <select class="form-select" wire:model="language">
                                         <option>{{ __('obelaw::settings.select_language') }}...</option>
@@ -50,6 +51,9 @@
                 </div>
             </div>
 
+            @foreach ($components as $component)
+                @livewire($component, ['admin' => $admin])
+            @endforeach
         </div>
     </div>
 </div>

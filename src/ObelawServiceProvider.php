@@ -12,6 +12,7 @@ use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
+use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
 use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Views\Builder\Form\CheckboxField;
@@ -91,7 +92,9 @@ class ObelawServiceProvider extends ServiceProviderBase
         });
 
         Livewire::component('obelaw-auth-login', LoginPage::class);
+
         Livewire::component('obelaw-account-settings', SettingsPage::class);
+        Livewire::component('obelaw-account-settings-update-password', UpdatePassword::class);
     }
 
     private function viewComponents(): array

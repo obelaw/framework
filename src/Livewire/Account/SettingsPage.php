@@ -10,19 +10,27 @@ use Obelaw\Framework\Views\Layout\DashboardLayout;
 class SettingsPage extends Component
 {
     public $admin;
+
     public $language;
+
+    protected $components = [];
 
     public function mount()
     {
         $this->admin = Auth::guard('obelaw')->user();
 
         $this->language = $this->admin->lang;
+
+        $this->components = [
+            'obelaw-account-settings-update-password',
+        ];
     }
 
     public function render()
     {
         return view('obelaw::settings', [
             'languages' => Languages::getLanguages(),
+            'components' => $this->components,
         ])->layout(DashboardLayout::class);
     }
 
