@@ -3,8 +3,9 @@
 namespace Obelaw\Framework\Base;
 
 use Illuminate\Support\Facades\Cache;
-use Livewire\Component;
+use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
 abstract class FromBase extends Component
 {
@@ -26,12 +27,12 @@ abstract class FromBase extends Component
 
     public function preTitle()
     {
-        return $this->pretitle;
+        return Str::contains($this->pretitle, '::forms') ? __($this->pretitle) : $this->pretitle;
     }
 
     public function title()
     {
-        return $this->title;
+        return Str::contains($this->title, '::forms') ? __($this->title) : $this->title;
     }
 
     protected function rules()
@@ -58,7 +59,7 @@ abstract class FromBase extends Component
         //
     }
 
-    protected function psuhAlert($type = 'success', $massage)
+    protected function pushAlert($type = 'success', $massage)
     {
         $this->alert($type, $massage, [
             'position' => 'top-end',

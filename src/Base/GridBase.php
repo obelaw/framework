@@ -3,9 +3,10 @@
 namespace Obelaw\Framework\Base;
 
 use Illuminate\Support\Facades\Cache;
-use Obelaw\Framework\Builder\Grid;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Obelaw\Framework\Builder\Grid;
 
 abstract class GridBase extends Component
 {
@@ -37,12 +38,12 @@ abstract class GridBase extends Component
 
     public function preTitle()
     {
-        return $this->pretitle;
+        return Str::contains($this->pretitle, '::grids') ? __($this->pretitle) : $this->pretitle;
     }
 
     public function title()
     {
-        return $this->title;
+        return Str::contains($this->title, '::grids') ? __($this->title) : $this->title;
     }
 
     public function render()
