@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
-use Obelaw\Framework\Modules\RoutesManagement;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,17 +25,3 @@ Route::get('/', function () {
 })->name('obelaw.home');
 
 Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
-
-try {
-    foreach (RoutesManagement::listRoutes() as $id => $routes) {
-        Route::middleware(['obelawIdentifier:' . $id])->group(function () use ($routes) {
-            foreach ($routes as $route) {
-                Route::get($route['uri'], $route['action'])->name($route['name']);
-            }
-        });
-    }
-} catch (\Throwable $th) {
-    if (!app()->runningInConsole()) {
-        throw $th;
-    }
-}

@@ -4,6 +4,7 @@ namespace Obelaw\Framework;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Livewire\Livewire;
 use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
@@ -13,6 +14,7 @@ use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
+use Obelaw\Framework\Modules\RoutesManagement;
 use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Views\Builder\Form\CheckboxField;
@@ -64,6 +66,12 @@ class ObelawServiceProvider extends ServiceProviderBase
         $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        foreach (RoutesManagement::listRoutes() as $routes) {
+            Route::middleware(['obelawIdentifier:' . $routes['id']])->group(function () use ($routes) {
+                $this->loadRoutesFrom($routes['path']);
+            });
+        }
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 

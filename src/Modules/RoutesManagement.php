@@ -8,13 +8,11 @@ class RoutesManagement
 {
     private static $routes = [];
 
-    private static function setRoute($id, $name, $uri, $action)
+    private static function setRoute($id, $path)
     {
         $route = [
             'id' => $id,
-            'name' => 'obelaw.' . $name,
-            'uri' => $uri,
-            'action' => $action,
+            'path' => $path,
         ];
 
         array_push(static::$routes, $route);
@@ -30,48 +28,21 @@ class RoutesManagement
         Cache::forever('obelawRoutes', $routes);
     }
 
-    public static function manage($routes)
+    public static function manage($modules)
     {
-        foreach ($routes['group'] as $prefix => $_routes) {
-            foreach ($_routes as $uri => $action) {
-                if (!is_array($action)) {
-                    static::setRoute(
-                        id: $routes['id'],
-                        name: $prefix . '.' . static::handlePerma($uri),
-                        uri: $prefix . '/' . $uri,
-                        action: $action,
-                    );
-                }
+        foreach ($modules as $id => $module) {
+            $pathRoutesFile = $module['root'] . DIRECTORY_SEPARATOR . 'routes.php';
 
-                if (is_array($action)) {
-                    foreach ($action as $_uri => $_action) {
-                        static::setRoute(
-                            id: $routes['id'],
-                            name: $prefix . '.' . $uri . '.' . static::handlePerma($_uri),
-                            uri: $prefix . '/' . $uri . '/' . $_uri,
-                            action: $_action,
-                        );
-                    }
-                }
+            if (file_exists($pathRoutesFile)) {
+                static::setRoute($id, $pathRoutesFile);
             }
         }
 
-        $collect = collect(static::getRoutes());
-
-        $collect = $collect->groupBy('id')->toArray();
-
-        static::cacheRoutes($collect);
+        static::cacheRoutes(static::getRoutes());
     }
 
     public static function listRoutes()
     {
         return Cache::get('obelawRoutes', []);
-    }
-
-    public static function handlePerma($prama)
-    {
-        $prama = preg_replace('/{[\s\S]+?}/', '', $prama);
-        $prama = str_replace('/', '', $prama);
-        return $prama;
     }
 }

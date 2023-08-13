@@ -19,7 +19,7 @@ class Registrar
 
     public static $ACL = [];
 
-    public static function module(string $id, string $root, array $info = [], array $navbar = [], array $routes = [], array $ACL = [])
+    public static function module(string $id, string $root, array $info = [], array $navbar = [], array $ACL = [])
     {
         $module[$id] = [];
 
@@ -40,13 +40,6 @@ class Registrar
             static::$navbars = array_merge(static::$navbars, [$id => $navbar]);
         }
 
-        if (!empty($routes)) {
-            static::$routes = array_merge(static::$routes, [
-                'id' => $id,
-                'group' => [$module[$id]['info']['slug'] => $routes],
-            ]);
-        }
-
         if (!empty($ACL)) {
             static::$ACL = array_merge(static::$ACL, [$id => $ACL]);
         }
@@ -58,7 +51,7 @@ class Registrar
 
         GridsManagement::manage(static::$modules);
 
-        RoutesManagement::manage(static::$routes);
+        RoutesManagement::manage(static::$modules);
 
         Cache::forever('obelawModules', static::$modules);
 
