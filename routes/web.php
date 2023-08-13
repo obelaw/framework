@@ -27,10 +27,16 @@ Route::get('/', function () {
 
 Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
 
-foreach (RoutesManagement::listRoutes() as $id => $routes) {
-    Route::middleware(['obelawIdentifier:' . $id])->group(function () use ($routes) {
-        foreach ($routes as $route) {
-            Route::get($route['uri'], $route['action'])->name($route['name']);
-        }
-    });
+try {
+    foreach (RoutesManagement::listRoutes() as $id => $routes) {
+        Route::middleware(['obelawIdentifier:' . $id])->group(function () use ($routes) {
+            foreach ($routes as $route) {
+                Route::get($route['uri'], $route['action'])->name($route['name']);
+            }
+        });
+    }
+} catch (\Throwable $th) {
+    if (!app()->runningInConsole()) {
+        throw $th;
+    }
 }
