@@ -10,12 +10,9 @@ class RoutesManagement
 
     private static function setRoute($id, $path)
     {
-        $route = [
-            'id' => $id,
-            'path' => $path,
-        ];
+        $route[$id] = $path;
 
-        array_push(static::$routes, $route);
+        static::$routes = array_merge(static::$routes, $route);
     }
 
     private static function getRoutes()

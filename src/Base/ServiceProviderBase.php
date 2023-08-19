@@ -2,9 +2,8 @@
 
 namespace Obelaw\Framework\Base;
 
+use Exception;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Route;
-use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 
 abstract class ServiceProviderBase extends ServiceProvider
 {
@@ -16,10 +15,6 @@ abstract class ServiceProviderBase extends ServiceProvider
      */
     protected function loadRoutesFrom($path)
     {
-        Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
-            ->prefix('obelaw')
-            ->group(function () use ($path) {
-                parent::loadRoutesFrom($path);
-            });
+        throw new Exception('You can\'t use `loadRoutesFrom` with Obelaw', 1000);
     }
 }
