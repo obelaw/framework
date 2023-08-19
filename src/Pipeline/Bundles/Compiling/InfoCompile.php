@@ -10,7 +10,6 @@ class InfoCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -19,11 +18,6 @@ class InfoCompile
         $outBundles = [];
 
         foreach ($paths as $id => $path) {
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
-
             $pathInfoFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'info.php';
 
             if (file_exists($pathInfoFile)) {

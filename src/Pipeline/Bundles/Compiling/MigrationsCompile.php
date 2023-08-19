@@ -12,7 +12,6 @@ class MigrationsCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -36,11 +35,6 @@ class MigrationsCompile
     public function manage($paths)
     {
         foreach ($paths as $id => $path) {
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
-
             $pathMigrationsFiles = $path . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR . 'migrations';
 
             if (is_dir($pathMigrationsFiles)) {

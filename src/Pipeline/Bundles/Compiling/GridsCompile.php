@@ -13,7 +13,6 @@ class GridsCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -23,11 +22,6 @@ class GridsCompile
 
         foreach ($paths as $id => $path) {
             $_grid = [];
-
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
 
             if (is_dir($path . DIRECTORY_SEPARATOR . 'etc/grids')) {
                 foreach (glob($path . DIRECTORY_SEPARATOR . 'etc/grids/*.php') as $filename) {

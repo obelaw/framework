@@ -11,7 +11,6 @@ class FormsCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -21,11 +20,6 @@ class FormsCompile
 
         foreach ($paths as $id => $path) {
             $_form = [];
-
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
 
             if (is_dir($path . DIRECTORY_SEPARATOR . 'etc/forms')) {
 
@@ -85,11 +79,6 @@ class FormsCompile
         $outfields = [];
 
         foreach ($paths as $id => $path) {
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
-
             if (is_dir($path . DIRECTORY_SEPARATOR . 'etc/forms' . DIRECTORY_SEPARATOR . 'appends')) {
                 foreach (glob($path . DIRECTORY_SEPARATOR . 'etc/forms' . DIRECTORY_SEPARATOR . 'appends' . DIRECTORY_SEPARATOR . '*.php') as $filename) {
                     $formClass = include($filename);

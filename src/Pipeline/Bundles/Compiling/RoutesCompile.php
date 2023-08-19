@@ -12,7 +12,6 @@ class RoutesCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -36,11 +35,6 @@ class RoutesCompile
     public function manage($paths)
     {
         foreach ($paths as $id => $path) {
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
-
             $pathRoutesFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'routes.php';
 
             if (file_exists($pathRoutesFile)) {

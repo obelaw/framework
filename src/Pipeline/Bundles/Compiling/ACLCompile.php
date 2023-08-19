@@ -10,7 +10,6 @@ class ACLCompile
 
     public function __construct(
         protected $cachePrefix = null,
-        protected $actives = null
     ) {
     }
 
@@ -19,13 +18,7 @@ class ACLCompile
         $outACL = [];
 
         foreach ($paths as $id => $path) {
-            //
-            if (is_array($this->actives) && !in_array($id, $this->actives)) {
-                continue;
-            }
-
             $pathNavbarFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'ACL.php';
-
 
             if (file_exists($pathNavbarFile)) {
                 $outACL = array_merge($outACL, [$id => require $pathNavbarFile]);

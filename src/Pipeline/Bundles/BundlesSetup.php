@@ -36,13 +36,21 @@ class BundlesSetup
         ];
     }
 
-    public function run(string $cachePrefix = null, array $available = null)
+    public function run(string $cachePrefix = null, array $actives = null)
     {
         $cachePrefix = $cachePrefix ?? Bundles::getCachePrefix();
-        $available = $available ?? Bundles::getActives();
+        $actives = $actives ?? Bundles::getActives();
+
+        if (!is_null($actives)) {
+            $inactives = array_diff(array_keys($this->modulesPaths), $actives);
+
+            foreach ($inactives as $unactive) {
+                unset($this->modulesPaths[$unactive]);
+            }
+        }
 
         foreach ($this->compiles as $compile) {
-            $compileObj = new $compile($cachePrefix, $available);
+            $compileObj = new $compile($cachePrefix);
             $compileObj->manage($this->modulesPaths);
         }
     }
