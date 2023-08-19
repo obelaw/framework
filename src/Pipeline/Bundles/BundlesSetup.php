@@ -16,8 +16,19 @@ class BundlesSetup
 {
     public function __construct(
         public $modulesPaths = [],
+        private $compiles = [],
     ) {
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
+
+        $this->compiles = [
+            InfoCompile::class,
+            FormsCompile::class,
+            GridsCompile::class,
+            RoutesCompile::class,
+            MigrationsCompile::class,
+            NavbarCompile::class,
+            ACLCompile::class,
+        ];
     }
 
     public function run(string $cachePrefix = null, array $available = null)
@@ -25,25 +36,9 @@ class BundlesSetup
         $cachePrefix = $cachePrefix ?? Bundles::getCachePrefix();
         $available = $available ?? Bundles::getActives();
 
-        $infoCompile = new InfoCompile($cachePrefix, $available);
-        $infoCompile->manage($this->modulesPaths);
-
-        $formsCompile = new FormsCompile($cachePrefix, $available);
-        $formsCompile->manage($this->modulesPaths);
-
-        $gridsCompile = new GridsCompile($cachePrefix, $available);
-        $gridsCompile->manage($this->modulesPaths);
-
-        $routesCompile = new RoutesCompile($cachePrefix, $available);
-        $routesCompile->manage($this->modulesPaths);
-
-        $migrationsCompile = new MigrationsCompile($cachePrefix, $available);
-        $migrationsCompile->manage($this->modulesPaths);
-
-        $navbarCompile = new NavbarCompile($cachePrefix, $available);
-        $navbarCompile->manage($this->modulesPaths);
-
-        $ACLCompile = new ACLCompile($cachePrefix, $available);
-        $ACLCompile->manage($this->modulesPaths);
+        foreach ($this->compiles as $compile) {
+            $compileObj = new $compile($cachePrefix, $available);;
+            $compileObj->manage($this->modulesPaths);
+        }
     }
 }
