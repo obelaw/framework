@@ -18,6 +18,11 @@ class BundlesSetup
         public $modulesPaths = [],
         private $compiles = [],
     ) {
+
+        if (ExternalDirectory::hasDirectory()) {
+            ExternalDirectory::scan();
+        }
+
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
 
         $this->compiles = [
@@ -37,7 +42,7 @@ class BundlesSetup
         $available = $available ?? Bundles::getActives();
 
         foreach ($this->compiles as $compile) {
-            $compileObj = new $compile($cachePrefix, $available);;
+            $compileObj = new $compile($cachePrefix, $available);
             $compileObj->manage($this->modulesPaths);
         }
     }
