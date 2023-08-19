@@ -9,10 +9,12 @@ use Livewire\Livewire;
 use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
+use Obelaw\Framework\Console\MigrateCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
+use Obelaw\Framework\Pipeline\Bundles\BundlesManagement;
 use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Views\Builder\Form\CheckboxField;
@@ -49,6 +51,10 @@ class ObelawServiceProvider extends ServiceProviderBase
             ], config('auth.providers.obelaw', [])),
         ]);
 
+        $this->app->bind('bundles', function($app) {
+            return new BundlesManagement();
+        });
+
         Languages::setLanguage('ar', 'العربية');
     }
 
@@ -74,6 +80,7 @@ class ObelawServiceProvider extends ServiceProviderBase
             $this->commands([
                 InstallCommand::class,
                 SetupCommand::class,
+                MigrateCommand::class,
             ]);
 
             $this->publishes([

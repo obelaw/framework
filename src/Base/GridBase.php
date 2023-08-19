@@ -2,11 +2,11 @@
 
 namespace Obelaw\Framework\Base;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Obelaw\Framework\Builder\Grid;
+use Obelaw\Framework\Facades\Bundles;
 
 abstract class GridBase extends Component
 {
@@ -20,7 +20,7 @@ abstract class GridBase extends Component
 
     public function boot()
     {
-        $grid = Cache::get('obelawGrids')[$this->gridId];
+        $grid = Bundles::getGrids($this->gridId);
 
         $gridBuild = Grid::model($grid['model']);
 

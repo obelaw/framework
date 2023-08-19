@@ -2,10 +2,10 @@
 
 namespace Obelaw\Framework\Base;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Obelaw\Framework\Facades\Bundles;
 
 abstract class FromBase extends Component
 {
@@ -18,7 +18,7 @@ abstract class FromBase extends Component
 
     public function boot()
     {
-        $this->fields = Cache::get('obelawForms')[$this->formId];
+        $this->fields = Bundles::getForms($this->formId);
 
         foreach ($this->fields as $field) {
             $this->{$field['model']} = $field['value'] ?? null;

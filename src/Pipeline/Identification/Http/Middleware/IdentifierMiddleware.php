@@ -5,8 +5,8 @@ namespace Obelaw\Framework\Pipeline\Identification\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Pipeline\Identification\Identifier;
-use Obelaw\Framework\Registrar;
 
 class IdentifierMiddleware
 
@@ -20,16 +20,13 @@ class IdentifierMiddleware
      */
     public function handle(Request $request, Closure $next, $id)
     {
-        $modules = Registrar::getModules();
+        $module = Bundles::getModules($id);
 
-        if ($modules[$id]) {
+        $module = array_merge(['id' => $id], $module);
 
-            $module = array_merge(['id' => $id], $modules[$id]['info']);
+        View::share('_module',  $module);
 
-            View::share('_module',  $module);
-
-            Identifier::setModule($module);
-        }
+        Identifier::setModule($module);
 
         return $next($request);
     }

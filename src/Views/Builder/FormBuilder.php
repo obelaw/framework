@@ -2,9 +2,9 @@
 
 namespace Obelaw\Framework\Views\Builder;
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\View\Component;
 use Illuminate\View\View;
+use Obelaw\Framework\Facades\Bundles;
 
 class FormBuilder extends Component
 {
@@ -24,7 +24,7 @@ class FormBuilder extends Component
         $this->method = $method;
         $this->action = $action;
 
-        $this->fields = Cache::get('obelawForms')[$id];
+        $this->fields = Bundles::getForms($id);
     }
 
     /**

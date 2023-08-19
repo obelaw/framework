@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Obelaw\Framework\Console;
 
 use Illuminate\Console\Command;
-use Obelaw\Framework\Registrar;
+use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Framework\Pipeline\Bundles\BundlesSetup;
 
 final class SetupCommand extends Command
 {
@@ -15,12 +16,8 @@ final class SetupCommand extends Command
 
     public function handle(): void
     {
-        Registrar::setupModules();
-
-        $this->line('<fg=white;bg=blue> OBELAW </> Modules have been setup.');
-        $this->line('<fg=white;bg=blue> OBELAW </> Number of modules: `' . Registrar::getCountModules() . '`.');
-        $this->line('<fg=white;bg=blue> OBELAW </> Number of forms: `' . Registrar::getCountForms() . '`.');
-        $this->line('<fg=white;bg=blue> OBELAW </> Number of navbar: `' . Registrar::getCountNavbar() . '`.');
-        $this->line('<fg=white;bg=blue> OBELAW </> Number of ACL (permissions): `' . Registrar::getCountACL() . '`.');
+        // dd(Bundles::getCachePrefix());
+        $bundlesSetup = new BundlesSetup();
+        $bundlesSetup->run();
     }
 }

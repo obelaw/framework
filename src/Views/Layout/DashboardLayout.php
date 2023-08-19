@@ -4,6 +4,7 @@ namespace Obelaw\Framework\Views\Layout;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
+use Obelaw\Framework\Facades\Bundles;
 
 class DashboardLayout extends Component
 {
@@ -23,7 +24,7 @@ class DashboardLayout extends Component
      */
     public function __construct()
     {
-        $this->modules = \Obelaw\Framework\Registrar::getListModules();
+        $this->modules = Bundles::getModules();
     }
 
     /**

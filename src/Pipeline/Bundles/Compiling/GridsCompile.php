@@ -1,26 +1,38 @@
 <?php
 
-namespace Obelaw\Framework\Modules;
+namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
 
 use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Builder\Build\Grid\Bottom;
 use Obelaw\Framework\Builder\Build\Grid\CTA;
 use Obelaw\Framework\Builder\Build\Grid\Table;
 
-class GridsManagement
+class GridsCompile
 {
-    public static function mergeGrids($modules)
+    public $count = 0;
+
+    public function __construct(
+        protected $cachePrefix = null,
+        protected $actives = null
+    ) {
+    }
+
+    public function mergeGrids($paths)
     {
         $outGrids = [];
 
-        foreach ($modules as $id => $data) {
+        foreach ($paths as $id => $path) {
             $_grid = [];
 
-            if (is_dir($data['root'] . '/grids')) {
-                foreach (glob($data['root'] . '/grids/*.php') as $filename) {
+            //
+            if (is_array($this->actives) && !in_array($id, $this->actives)) {
+                continue;
+            }
+
+            if (is_dir($path . DIRECTORY_SEPARATOR . 'etc/grids')) {
+                foreach (glob($path . DIRECTORY_SEPARATOR . 'etc/grids/*.php') as $filename) {
                     $gridClass = include($filename);
                     $gridClass = new $gridClass;
-
 
                     //Columns class
                     $table = new Table;
@@ -49,13 +61,15 @@ class GridsManagement
         return $outGrids;
     }
 
-    public static function cacheGrids($grids)
+    public function cacheGrids($grids)
     {
-        Cache::forever('obelawGrids', $grids);
+        Cache::forever($this->cachePrefix . 'obelawGrids', $grids);
     }
 
-    public static function manage($modules)
+    public function manage($paths)
     {
-        static::cacheGrids(static::mergeGrids($modules));
+        $grids = $this->mergeGrids($paths);
+        $this->cacheGrids($grids);
+        $this->count = count($grids);
     }
 }

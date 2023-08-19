@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Modules\RoutesManagement;
@@ -26,13 +27,20 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
 
         Route::get('/', function () {
             return view('obelaw::home', [
-                'modules' => \Obelaw\Framework\Registrar::getListModules()
+                'modules' => array_values(Bundles::getModules())
             ]);
         })->name('obelaw.home');
 
         Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
 
-        array_map(function ($routes) {
-            require $routes;
-        }, RoutesManagement::listRoutes());
+        try {
+            foreach (Bundles::getRoutes() as $id => $routes) {
+                Route::middleware('obelawIdentifier:' . $id)
+                    ->group(function () use ($routes) {
+                        require $routes;
+                    });
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     });
