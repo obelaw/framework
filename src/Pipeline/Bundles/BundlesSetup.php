@@ -11,6 +11,7 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\MigrationsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\NavbarCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\RoutesCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\ViewsCompile;
 
 class BundlesSetup
 {
@@ -29,6 +30,7 @@ class BundlesSetup
             InfoCompile::class,
             FormsCompile::class,
             GridsCompile::class,
+            ViewsCompile::class,
             RoutesCompile::class,
             MigrationsCompile::class,
             NavbarCompile::class,

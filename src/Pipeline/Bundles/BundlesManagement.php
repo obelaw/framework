@@ -93,6 +93,20 @@ class BundlesManagement
     }
 
     /**
+     * Get the value of views
+     */
+    public function getViews($id = null)
+    {
+        $views = Cache::get($this->getCachePrefix() . 'obelawViews');
+
+        if (!is_null($id)) {
+            return $views[$id];
+        }
+
+        return $views;
+    }
+
+    /**
      * Get the value of routes
      */
     public function getRoutes()
