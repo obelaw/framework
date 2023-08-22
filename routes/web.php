@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
-use Obelaw\Framework\Modules\RoutesManagement;
 use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 
 /*
@@ -36,11 +35,11 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
         try {
             foreach (Bundles::getRoutes() as $id => $routes) {
                 Route::middleware('obelawIdentifier:' . $id)
-                    ->group(function () use ($routes) {
-                        require $routes;
-                    });
+                    ->group($routes);
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            if (!app()->runningInConsole()) {
+                throw $th;
+            }
         }
     });
