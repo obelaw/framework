@@ -4,18 +4,13 @@ namespace Obelaw\Framework\Base;
 
 use Illuminate\Support\Str;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Obelaw\Framework\Facades\Bundles;
 
 abstract class ViewBase extends Component
 {
-    use WithPagination;
-
-    protected $pretitle = 'Pre Title';
-    protected $title = 'Title';
+    protected $pretitle = 'Pre Title View';
+    protected $title = 'Title View';
     protected $paginationTheme = 'bootstrap';
-
-    protected $parameters = null;
 
     private $view = null;
 
@@ -28,12 +23,12 @@ abstract class ViewBase extends Component
 
     public function preTitle()
     {
-        return Str::contains($this->pretitle, '::grids') ? __($this->pretitle) : $this->pretitle;
+        return Str::contains($this->pretitle, '::views') ? __($this->pretitle) : $this->pretitle;
     }
 
     public function title()
     {
-        return Str::contains($this->title, '::grids') ? __($this->title) : $this->title;
+        return Str::contains($this->title, '::views') ? __($this->title) : $this->title;
     }
 
     public function render()
