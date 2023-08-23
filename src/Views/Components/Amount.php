@@ -6,9 +6,14 @@ use Illuminate\View\Component;
 
 class Amount extends Component
 {
+    public $thanZero = null;
+
     public function __construct(public $value)
     {
         $this->value = number_format($value, 2);
+
+        if ($value != 0)
+            $this->thanZero = ($value > 0) ? 'green' : 'red';
     }
 
     /**
@@ -17,7 +22,7 @@ class Amount extends Component
     public function render()
     {
         return <<<'BLADE'
-            {{ $value }} EGP
+            <span style="font-family: monospace;" class="text-{{ $thanZero ?? 'orange' }}">{{ $value }} EGP</span>
         BLADE;
     }
 }
