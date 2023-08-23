@@ -135,4 +135,15 @@ class BundlesManagement
     {
         return Cache::get($this->getCachePrefix() . 'obelawMigration');
     }
+
+    public function hasModule($id)
+    {
+        $modules = Cache::get($this->getCachePrefix() . 'obelawModules');
+
+        if (isset($modules[$id])) {
+            return true;
+        }
+
+        return false;
+    }
 }

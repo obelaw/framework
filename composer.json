@@ -4,7 +4,10 @@
     "autoload": {
         "psr-4": {
             "Obelaw\\Framework\\": "src/"
-        }
+        },
+        "files": [
+            "helpers/autoload.php"
+        ]
     },
     "authors": [
         {
