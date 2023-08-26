@@ -10,6 +10,8 @@ class BundlesManagement
 
     private $actives = null;
 
+    private $aliases = [];
+
     /**
      * Get the value of cachePrefix
      */
@@ -57,7 +59,7 @@ class BundlesManagement
     {
         $modules = Cache::get($this->getCachePrefix() . 'obelawModules');
 
-        if (!is_null($id)) {
+        if (!is_null($id) && isset($modules[$id])) {
             return $modules[$id];
         }
 
@@ -121,7 +123,7 @@ class BundlesManagement
     {
         $navbars = Cache::get($this->getCachePrefix() . 'obelawNavbars');
 
-        if (!is_null($id)) {
+        if (!is_null($id) && isset($navbars[$id])) {
             return $navbars[$id];
         }
 
@@ -145,5 +147,15 @@ class BundlesManagement
         }
 
         return false;
+    }
+
+    public function pluginAlias($from, $to)
+    {
+        $this->aliases = array_merge($this->aliases, [$from => $to]);
+    }
+
+    public function getPluginAliases()
+    {
+        return $this->aliases;
     }
 }

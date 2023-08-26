@@ -10,6 +10,11 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\GridsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\MigrationsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\NavbarCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\FormsPluginCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\GridsPluginCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\NavbarPluginCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\PluginCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\RoutesPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\RoutesCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\ViewsCompile;
 
@@ -17,6 +22,7 @@ class BundlesSetup
 {
     public function __construct(
         public $modulesPaths = [],
+        public $pluginsPaths = [],
         private $compiles = [],
     ) {
 
@@ -25,6 +31,8 @@ class BundlesSetup
         }
 
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
+
+        $this->pluginsPaths = BundleRegistrar::getPaths(BundleRegistrar::PLUGIN);
 
         $this->compiles = [
             InfoCompile::class,
@@ -35,6 +43,14 @@ class BundlesSetup
             MigrationsCompile::class,
             NavbarCompile::class,
             ACLCompile::class,
+        ];
+
+        $this->pluginCompiles = [
+            PluginCompile::class,
+            NavbarPluginCompile::class,
+            RoutesPluginCompile::class,
+            FormsPluginCompile::class,
+            GridsPluginCompile::class,
         ];
     }
 
@@ -54,6 +70,12 @@ class BundlesSetup
         foreach ($this->compiles as $compile) {
             $compileObj = new $compile($cachePrefix);
             $compileObj->manage($this->modulesPaths);
+        }
+
+
+        foreach ($this->pluginCompiles as $compile) {
+            $compileObj = new $compile($cachePrefix);
+            $compileObj->manage($this->pluginsPaths);
         }
     }
 }

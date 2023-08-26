@@ -20,6 +20,12 @@ class IdentifierMiddleware
      */
     public function handle(Request $request, Closure $next, $id)
     {
+        $aliases = Bundles::getPluginAliases();
+
+        if (isset($aliases[$id])) {
+            $id = $aliases[$id];
+        }
+
         $module = Bundles::getModules($id);
 
         $module = array_merge(['id' => $id], $module);

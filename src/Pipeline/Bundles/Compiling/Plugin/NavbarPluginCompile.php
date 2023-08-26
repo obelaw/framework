@@ -1,10 +1,10 @@
 <?php
 
-namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
+namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
 
-class NavbarCompile
+class NavbarPluginCompile
 {
     public $count = 0;
 
@@ -15,7 +15,7 @@ class NavbarCompile
 
     public function merge($paths)
     {
-        $outNavbars = [];
+        $outNavbars = Cache::get($this->cachePrefix . 'obelawNavbars', []);
 
         foreach ($paths as $id => $path) {
             $pathNavbarFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'navbar.php';
@@ -27,8 +27,12 @@ class NavbarCompile
                 $navbar = require $pathNavbarFile;
                 $navbar = new $navbar;
 
-                if (!property_exists($navbar, 'appendTo')) {
-                    $outNavbars = array_merge($outNavbars, [$id => $navbar->navbar()]);
+                if (property_exists($navbar, 'appendTo')) {
+                    if (isset($outNavbars[$navbar->appendTo])) {
+                        $outNavbars[$navbar->appendTo] = array_merge($outNavbars[$navbar->appendTo], $navbar->navbar());
+                    } else {
+                        throw new \Exception("Error Processing Request", 1);
+                    }
                 }
             }
         }
