@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Builder\Build\View\Button;
 use Obelaw\Framework\Builder\Build\View\Tabs;
 
 class ViewsPluginCompile
@@ -28,11 +29,17 @@ class ViewsPluginCompile
 
                     //Columns class
                     $tabs = new Tabs;
+                    $buttons = new Button;
 
                     $viewClass->tabs($tabs);
 
+                    if (method_exists($viewClass, 'magicButtons')) {
+                        $viewClass->magicButtons($buttons);
+                    }
+
                     $_view[$id . '_' . basename($filename, '.php')] = [
                         'tabs' => $tabs->getTabs(),
+                        'buttons' => (method_exists($viewClass, 'magicButtons')) ? $buttons->getButtons() : null,
                     ];
                 }
                 $outViews = array_merge($outViews, $_view);

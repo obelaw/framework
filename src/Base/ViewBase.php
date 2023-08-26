@@ -13,12 +13,14 @@ abstract class ViewBase extends Component
     protected $paginationTheme = 'bootstrap';
 
     private $view = null;
+    private $buttons = null;
 
     public function boot()
     {
         $view = Bundles::getViews($this->viewId);
 
         $this->view = $view['tabs'];
+        $this->buttons = $view['buttons'];
     }
 
     public function preTitle()
@@ -36,6 +38,7 @@ abstract class ViewBase extends Component
         return view('obelaw::builder.build.view', [
             'pretitle' => $this->preTitle(),
             'title' => $this->title(),
+            'buttons' => $this->buttons,
             'tabs' => array_keys($this->view),
             'components' => $this->view,
             'parameters' => $this->parameters,
