@@ -72,7 +72,7 @@ class Table
 
             foreach ($this->getDataKeys() as $column) {
                 $rows['columns'][] = (!is_null($column['filter'])) ?
-                    call_user_func_array([$this->filter, $column['filter']], [$row->{$column['key']}]) :
+                    call_user_func_array([$this->filter, $column['filter']], [$row->{$column['key']}, $row]) :
                     $row->{$column['key']};
             }
 
