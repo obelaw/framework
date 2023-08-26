@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Builder\Build\Navbar\Links;
 
 class NavbarCompile
 {
@@ -27,8 +28,12 @@ class NavbarCompile
                 $navbar = require $pathNavbarFile;
                 $navbar = new $navbar;
 
+                $link = new Links;
+
+                $navbar->navbar($link);
+
                 if (!property_exists($navbar, 'appendTo')) {
-                    $outNavbars = array_merge($outNavbars, [$id => $navbar->navbar()]);
+                    $outNavbars = array_merge($outNavbars, [$id => $link->getLinks()]);
                 }
             }
         }

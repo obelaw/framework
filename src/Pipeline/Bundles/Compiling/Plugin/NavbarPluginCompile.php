@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Builder\Build\Navbar\Links;
 
 class NavbarPluginCompile
 {
@@ -27,9 +28,13 @@ class NavbarPluginCompile
                 $navbar = require $pathNavbarFile;
                 $navbar = new $navbar;
 
+                $link = new Links;
+
+                $navbar->navbar($link);
+
                 if (property_exists($navbar, 'appendTo')) {
                     if (isset($outNavbars[$navbar->appendTo])) {
-                        $outNavbars[$navbar->appendTo] = array_merge($outNavbars[$navbar->appendTo], $navbar->navbar());
+                        $outNavbars[$navbar->appendTo] = array_merge($outNavbars[$navbar->appendTo], $link->getLinks());
                     } else {
                         throw new \Exception("Error Processing Request", 1);
                     }
