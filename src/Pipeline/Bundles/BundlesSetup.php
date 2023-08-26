@@ -15,6 +15,7 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\GridsPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\NavbarPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\PluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\RoutesPluginCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\ViewsPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\RoutesCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\ViewsCompile;
 
@@ -51,6 +52,7 @@ class BundlesSetup
             RoutesPluginCompile::class,
             FormsPluginCompile::class,
             GridsPluginCompile::class,
+            ViewsPluginCompile::class,
         ];
     }
 

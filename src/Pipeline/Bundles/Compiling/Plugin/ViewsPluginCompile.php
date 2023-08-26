@@ -1,6 +1,6 @@
 <?php
 
-namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
+namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Builder\Build\View\Tabs;
