@@ -2,6 +2,7 @@
 
 (static function () {
     $files = [
+        'amount.php',
         'bundles.php',
     ];
 
