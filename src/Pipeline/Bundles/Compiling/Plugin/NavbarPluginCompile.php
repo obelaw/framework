@@ -34,6 +34,15 @@ class NavbarPluginCompile
 
                 if (property_exists($navbar, 'appendTo')) {
                     if (isset($outNavbars[$navbar->appendTo])) {
+
+                        foreach ($outNavbars[$navbar->appendTo] as $_id => $_navbar) {
+                            foreach ($link->getPushLink() as $pushId => $pushLink) {
+                                if (isset($_navbar['id']) && $_navbar['id'] == $pushId) {
+                                    array_push($outNavbars[$navbar->appendTo][$_id]['sublinks'], $pushLink);
+                                }
+                            }
+                        }
+
                         $outNavbars[$navbar->appendTo] = array_merge($outNavbars[$navbar->appendTo], $link->getLinks());
                     } else {
                         throw new \Exception("Error Processing Request", 1);

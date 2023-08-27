@@ -5,6 +5,7 @@ namespace Obelaw\Framework\Builder\Build\Navbar;
 class Links
 {
     private $links = [];
+    private $pushlinks = [];
 
     public function link($icon, $label, $href)
     {
@@ -15,6 +16,19 @@ class Links
         ];
 
         array_push($this->links, $link);
+
+        return $this;
+    }
+
+    public function pushLink($to, $icon, $label, $href)
+    {
+        $link[$to] = [
+            'icon' => $icon,
+            'label' => $label,
+            'href' => $href
+        ];
+
+        $this->pushlinks = array_merge($this->pushlinks, $link);
 
         return $this;
     }
@@ -40,5 +54,10 @@ class Links
     public function getLinks()
     {
         return $this->links;
+    }
+
+    public function getPushLink()
+    {
+        return $this->pushlinks;
     }
 }
