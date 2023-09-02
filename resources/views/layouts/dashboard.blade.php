@@ -265,7 +265,8 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <a href="{{ route('obelaw.account.settings') }}" class="dropdown-item">{{ __('obelaw::layout.settings') }}</a>
+                            <a href="{{ route('obelaw.account.settings') }}"
+                                class="dropdown-item">{{ __('obelaw::layout.settings') }}</a>
                             <a href="./sign-in.html" class="dropdown-item">{{ __('obelaw::layout.logout') }}</a>
                         </div>
                     </div>
@@ -352,15 +353,15 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank"
-                                        class="link-secondary" rel="noopener">Documentation</a></li>
-                                <li class="list-inline-item"><a href="./license.html"
-                                        class="link-secondary">License</a></li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler"
-                                        target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
-                                {{-- <li class="list-inline-item">
-                                    <a href="https://github.com/sponsors/codecalm" target="_blank"
-                                        class="link-secondary" rel="noopener">
+                                {{-- <li class="list-inline-item"><a href="#s" target="_blank"
+                                        class="link-secondary" rel="noopener">Documentation</a></li> --}}
+                                <li class="list-inline-item"><a href="#" class="link-secondary">License</a>
+                                </li>
+                                {{-- <li class="list-inline-item"><a href="#"
+                                        target="_blank" class="link-secondary" rel="noopener">Source code</a></li> --}}
+                                <li class="list-inline-item">
+                                    <a href="https://obelaw.com/" target="_blank" class="link-secondary"
+                                        rel="noopener">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon text-pink icon-filled icon-inline" width="24"
@@ -371,21 +372,21 @@
                                             <path
                                                 d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                                         </svg>
-                                        Sponsor
+                                        Obelaw
                                     </a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                         <div class="col-12 col-lg-auto mt-3 mt-lg-0">
                             <ul class="list-inline list-inline-dots mb-0">
                                 <li class="list-inline-item">
                                     Copyright &copy; 2023
-                                    <a href="." class="link-secondary">Obelaw</a>.
+                                    <a href="https://obelaw.com/" target="_blank" class="link-secondary">Obelaw</a>.
                                     All rights reserved.
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="./changelog.html" class="link-secondary" rel="noopener">
-                                        v1.0
+                                    <a href="#" class="link-secondary" rel="noopener">
+                                        v1.0.0
                                     </a>
                                 </li>
                             </ul>
