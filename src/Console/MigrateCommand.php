@@ -15,10 +15,10 @@ final class MigrateCommand extends Command
 
     public function handle(): void
     {
-        $paths = array_values(Bundles::getMigrations());
+        $migratePath = array_values(Bundles::getMigrations());
 
         $this->call('migrate', [
-            '--path' => $paths,
+            '--path' => $migratePath,
         ]);
     }
 }

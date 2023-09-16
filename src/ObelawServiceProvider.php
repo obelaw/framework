@@ -51,7 +51,7 @@ class ObelawServiceProvider extends ServiceProviderBase
             ], config('auth.providers.obelaw', [])),
         ]);
 
-        $this->app->bind('bundles', function($app) {
+        $this->app->bind('bundles', function ($app) {
             return new BundlesManagement();
         });
 
@@ -86,8 +86,6 @@ class ObelawServiceProvider extends ServiceProviderBase
             $this->publishes([
                 __DIR__ . '/../public/assets' => public_path('vendor/obelaw'),
             ], 'obelaw:assets');
-
-            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
         View::composer('*', function ($view) {

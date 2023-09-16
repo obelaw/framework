@@ -135,7 +135,14 @@ class BundlesManagement
      */
     public function getMigrations()
     {
-        return Cache::get($this->getCachePrefix() . 'obelawMigration');
+        $migratePath = [
+            '/vendor/obelaw/framework/database/migrations'
+        ];
+
+        return array_merge(
+            $migratePath,
+            Cache::get($this->getCachePrefix() . 'obelawMigration')
+        );
     }
 
     public function hasModule($id)

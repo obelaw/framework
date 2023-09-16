@@ -1,10 +1,10 @@
 <?php
 
-namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
+namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
 
-class MigrationsCompile
+class MigrationsPluginCompile
 {
     public $count = 0;
 
@@ -15,7 +15,7 @@ class MigrationsCompile
 
     public function merge($paths)
     {
-        $outoutMigrations = [];
+        $outoutMigrations = Cache::get($this->cachePrefix . 'obelawMigration', []);;
 
         foreach ($paths as $id => $path) {
             $pathInfoFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'migrations.php';
