@@ -69,6 +69,12 @@ class BundlesSetup
             foreach ($inactives as $unactive) {
                 unset($this->modulesPaths[$unactive]);
             }
+
+            $pluginsInactives = array_diff(array_keys($this->pluginsPaths), $actives);
+
+            foreach ($pluginsInactives as $pluginUnactive) {
+                unset($this->pluginsPaths[$pluginUnactive]);
+            }
         }
 
         foreach ($this->compiles as $compile) {
@@ -76,10 +82,11 @@ class BundlesSetup
             $compileObj->manage($this->modulesPaths);
         }
 
-
-        foreach ($this->pluginCompiles as $compile) {
-            $compileObj = new $compile($cachePrefix);
-            $compileObj->manage($this->pluginsPaths);
+        if ($this->pluginsPaths) {
+            foreach ($this->pluginCompiles as $compile) {
+                $compileObj = new $compile($cachePrefix);
+                $compileObj->manage($this->pluginsPaths);
+            }
         }
     }
 }
