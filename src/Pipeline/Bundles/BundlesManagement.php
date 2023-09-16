@@ -165,4 +165,10 @@ class BundlesManagement
     {
         return $this->aliases;
     }
+
+    public function setup()
+    {
+        $bundlesSetup = new BundlesSetup();
+        $bundlesSetup->run();
+    }
 }
