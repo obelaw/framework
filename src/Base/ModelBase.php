@@ -15,6 +15,10 @@ abstract class ModelBase extends Model
     {
         parent::__construct($attributes);
 
+        if ($connection = ModelConnection::getConnection()) {
+            $this->setConnection($connection);
+        }
+
         $this->setTable(config('obelaw.database.table_prefix', 'obelaw_') . $this->getTable());
     }
 }

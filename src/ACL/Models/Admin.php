@@ -4,6 +4,7 @@ namespace Obelaw\Framework\ACL\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Obelaw\Framework\ACL\Traits\HasACL;
+use Obelaw\Framework\Base\ModelConnection;
 
 class Admin extends Authenticatable
 {
@@ -28,6 +29,10 @@ class Admin extends Authenticatable
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+
+        if ($connection = ModelConnection::getConnection()) {
+            $this->setConnection($connection);
+        }
 
         $this->setTable(config('obelaw.database.table_prefix', 'obelaw_') . $this->getTable());
     }
