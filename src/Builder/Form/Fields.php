@@ -3,22 +3,24 @@
 namespace Obelaw\Framework\Builder\Form;
 
 use Exception;
+use Obelaw\Framework\Builder\Contracts\FieldType;
 
 class Fields
 {
     private $fields = [];
 
-    public function addField($type = 'text', $attributes)
+    public function addField($type = FieldType::TEXT, $attributes)
     {
         $attributes = match ($type) {
-            'text' => $this->handleText($attributes),
-            'textarea' => $this->handleTextArea($attributes),
-            'file' => $this->handleFile($attributes),
-            'date' => $this->handleDate($attributes),
-            'select' => $this->handleSelect($attributes),
-            'checkbox' => $this->handleCheckbox($attributes),
+            FieldType::TEXT => $this->handleText($attributes),
+            FieldType::TEXTAREA => $this->handleTextArea($attributes),
+            FieldType::FILE => $this->handleFile($attributes),
+            FieldType::DATE => $this->handleDate($attributes),
+            FieldType::SELECT => $this->handleSelect($attributes),
+            FieldType::CHECKBOX => $this->handleCheckbox($attributes),
+            FieldType::REFERENCE => $this->handleReference($attributes),
         };
-        
+
         $this->fields[] = $attributes;
     }
 
@@ -84,5 +86,11 @@ class Fields
     private function falterAttributes($attributes)
     {
         return $attributes;
+    }
+
+    private function handleReference($attributes)
+    {
+        $attributes['type'] = 'reference';
+        return $this->falterAttributes($attributes);
     }
 }
