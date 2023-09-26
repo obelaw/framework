@@ -8,6 +8,7 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\ACLCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\FormsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\GridsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\InstallCommandsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\MigrationsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\NavbarCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\FormsPluginCompile;
@@ -45,6 +46,7 @@ class BundlesSetup
             NavbarCompile::class,
             ACLCompile::class,
             MigrationsCompile::class,
+            InstallCommandsCompile::class,
         ];
 
         $this->pluginCompiles = [

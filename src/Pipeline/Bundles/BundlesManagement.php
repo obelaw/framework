@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Pipeline\Bundles;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Console\AddDefaultAdminCommand;
 
 class BundlesManagement
 {
@@ -142,6 +143,19 @@ class BundlesManagement
         return array_merge(
             $migratePath,
             Cache::get($this->getCachePrefix() . 'obelawMigration')
+        );
+    }
+
+    /**
+     * Get the value of at install
+     */
+    public function getAtInstalls()
+    {
+        return array_merge(
+            Cache::get($this->getCachePrefix() . 'obelawInstallCommands'),
+            [
+                AddDefaultAdminCommand::class,
+            ]
         );
     }
 
