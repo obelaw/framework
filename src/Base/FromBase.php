@@ -54,10 +54,14 @@ abstract class FromBase extends Component
         ])->layout($this->layout());
     }
 
-    protected function layout()
+    public function submit()
     {
-        //
+        $validateData = $this->validate();
+
+        $this->doSubmit($validateData);
     }
+
+    abstract protected function layout();
 
     protected function pushAlert($type = 'success', $massage)
     {
