@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Obelaw\Framework\Builder\Grid;
 use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class GridBase extends Component
 {
@@ -53,11 +54,6 @@ abstract class GridBase extends Component
             'title' => $this->title(),
             'grid' => $this->grid,
             'canRemoveRow' => method_exists($this, 'removeRow'),
-        ])->layout($this->layout());
-    }
-
-    protected function layout()
-    {
-        //
+        ])->layout(DashboardLayout::class);
     }
 }

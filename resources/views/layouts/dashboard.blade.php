@@ -274,77 +274,75 @@
             </div>
         </header>
 
-        @if (isset($nav))
-            <header class="navbar-expand-md">
-                <div class="collapse navbar-collapse" id="navbar-menu">
-                    <div class="navbar">
-                        <div class="container-xl">
-                            <ul class="navbar-nav">
+        <header class="navbar-expand-md">
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <div class="navbar">
+                    <div class="container-xl">
+                        <ul class="navbar-nav">
 
-                                @if (isset($_module))
-                                    <li class="nav-item opacity-50">
-                                        <a class="nav-link">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                @if (isset($_module['icon']))
-                                                    @svg('tabler-' . $_module['icon'], 'icon')
-                                                @else
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-face-id" width="24"
-                                                        height="24" viewBox="0 0 24 24" stroke-width="2"
-                                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
-                                                        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
-                                                        <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
-                                                        <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
-                                                        <path d="M9 10l.01 0"></path>
-                                                        <path d="M15 10l.01 0"></path>
-                                                        <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
-                                                    </svg>
-                                                @endif
-                                            </span>
-                                            <span class="nav-link-title">
-                                                {{ \Illuminate\Support\Str::contains($_module['name'], '::') ? __($_module['name']) : $_module['name'] }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item opacity-50">
-                                        <a class="nav-link">
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                                @if ($dir == 'ltr')
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-chevron-compact-right"
-                                                        width="24" height="24" viewBox="0 0 24 24"
-                                                        stroke-width="2" stroke="currentColor" fill="none"
-                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M11 4l3 8l-3 8"></path>
-                                                    </svg>
-                                                @endif
+                            @if (isset($_module))
+                                <li class="nav-item opacity-50">
+                                    <a class="nav-link">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            @if (isset($_module['icon']))
+                                                @svg('tabler-' . $_module['icon'], 'icon')
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-face-id" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                                                    <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                                                    <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                                                    <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                                                    <path d="M9 10l.01 0"></path>
+                                                    <path d="M15 10l.01 0"></path>
+                                                    <path d="M9.5 15a3.5 3.5 0 0 0 5 0"></path>
+                                                </svg>
+                                            @endif
+                                        </span>
+                                        <span class="nav-link-title">
+                                            {{ \Illuminate\Support\Str::contains($_module['name'], '::') ? __($_module['name']) : $_module['name'] }}
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item opacity-50">
+                                    <a class="nav-link">
+                                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            @if ($dir == 'ltr')
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-compact-right"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M11 4l3 8l-3 8"></path>
+                                                </svg>
+                                            @endif
 
-                                                @if ($dir == 'rtl')
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="icon icon-tabler icon-tabler-chevron-compact-left"
-                                                        width="24" height="24" viewBox="0 0 24 24"
-                                                        stroke-width="2" stroke="currentColor" fill="none"
-                                                        stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <path d="M13 20l-3 -8l3 -8"></path>
-                                                    </svg>
-                                                @endif
-                                            </span>
-                                        </a>
-                                    </li>
-                                @endif
+                                            @if ($dir == 'rtl')
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon icon-tabler icon-tabler-chevron-compact-left"
+                                                    width="24" height="24" viewBox="0 0 24 24"
+                                                    stroke-width="2" stroke="currentColor" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M13 20l-3 -8l3 -8"></path>
+                                                </svg>
+                                            @endif
+                                        </span>
+                                    </a>
+                                </li>
+                            @endif
 
-                                {{ $nav ?? null }}
-                            </ul>
-                        </div>
+                            <x-obelaw-navbar-builder />
+                        </ul>
                     </div>
                 </div>
-            </header>
-        @endif
+            </div>
+        </header>
 
         <div class="page-wrapper">
             {{ $slot }}

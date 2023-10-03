@@ -5,6 +5,7 @@ namespace Obelaw\Framework\Base;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class ViewBase extends Component
 {
@@ -42,16 +43,11 @@ abstract class ViewBase extends Component
             'tabs' => array_keys($this->view),
             'components' => $this->view,
             'parameters' => $this->parameters,
-        ])->layout($this->layout());
+        ])->layout(DashboardLayout::class);
     }
 
     protected function parameters(array $parameters = [])
     {
         $this->parameters = $parameters;
-    }
-
-    protected function layout()
-    {
-        //
     }
 }

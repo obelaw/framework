@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class FromBase extends Component
 {
@@ -51,7 +52,7 @@ abstract class FromBase extends Component
         return view('obelaw::builder.build.form', [
             'pretitle' => $this->preTitle(),
             'title' => $this->title(),
-        ])->layout($this->layout());
+        ])->layout(DashboardLayout::class);
     }
 
     public function submit()
@@ -60,8 +61,6 @@ abstract class FromBase extends Component
 
         $this->doSubmit($validateData);
     }
-
-    abstract protected function layout();
 
     protected function pushAlert($type = 'success', $massage)
     {
