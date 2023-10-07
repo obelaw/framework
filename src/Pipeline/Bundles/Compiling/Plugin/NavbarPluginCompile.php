@@ -33,19 +33,19 @@ class NavbarPluginCompile
                 $navbar->navbar($link);
 
                 if (property_exists($navbar, 'appendTo')) {
-                    if (isset($outNavbars[$navbar->appendTo])) {
+                    foreach ($navbar->appendTo as $appendTo) {
+                        if (isset($outNavbars[$appendTo])) {
 
-                        foreach ($outNavbars[$navbar->appendTo] as $_id => $_navbar) {
-                            foreach ($link->getPushLink() as $pushId => $pushLink) {
-                                if (isset($_navbar['id']) && $_navbar['id'] == $pushId) {
-                                    array_push($outNavbars[$navbar->appendTo][$_id]['sublinks'], $pushLink);
+                            foreach ($outNavbars[$appendTo] as $_id => $_navbar) {
+                                foreach ($link->getPushLink() as $pushId => $pushLink) {
+                                    if (isset($_navbar['id']) && $_navbar['id'] == $pushId) {
+                                        array_push($outNavbars[$appendTo][$_id]['sublinks'], $pushLink);
+                                    }
                                 }
                             }
-                        }
 
-                        $outNavbars[$navbar->appendTo] = array_merge($outNavbars[$navbar->appendTo], $link->getLinks());
-                    } else {
-                        throw new \Exception("Error Processing Request", 1);
+                            $outNavbars[$appendTo] = array_merge($outNavbars[$appendTo], $link->getLinks());
+                        }
                     }
                 }
             }
