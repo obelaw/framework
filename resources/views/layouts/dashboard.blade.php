@@ -274,13 +274,12 @@
             </div>
         </header>
 
-        <header class="navbar-expand-md">
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <div class="navbar">
-                    <div class="container-xl">
-                        <ul class="navbar-nav">
-
-                            @if (isset($_module))
+        @if (isset($_module))
+            <header class="navbar-expand-md">
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    <div class="navbar">
+                        <div class="container-xl">
+                            <ul class="navbar-nav">
                                 <li class="nav-item opacity-50">
                                     <a class="nav-link">
                                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -335,14 +334,14 @@
                                         </span>
                                     </a>
                                 </li>
-                            @endif
 
-                            <x-obelaw-navbar-builder />
-                        </ul>
+                                <x-obelaw-navbar-builder />
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </header>
+            </header>
+        @endif
 
         <div class="page-wrapper">
             {{ $slot }}
