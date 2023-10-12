@@ -34,6 +34,6 @@
 
     </div>
     <div class="card-footer text-end">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">{{ __('obelaw::builder.form.submit') }}</button>
     </div>
 </form>
