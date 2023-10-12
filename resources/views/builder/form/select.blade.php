@@ -4,7 +4,8 @@
         <select class="form-select @error($model) is-invalid @enderror" wire:model.defer="{{ $model }}" {{ $attributes }} @if($multiple) multiple @endif>
             <option value="null">{{ __('obelaw::builder.form.select') }}...</option>
             @foreach ($options as $option)
-                <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
+                <option value="{{ $option['value'] }}">
+                    {{ Str::contains($option['label'], '::forms') ? __($option['label']) : $option['label'] }}</option>
             @endforeach
         </select>
         @error($model)
