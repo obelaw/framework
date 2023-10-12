@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
+use Obelaw\Framework\Livewire\Auth\LogoutController;
 use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 
 /*
@@ -23,6 +24,7 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
     ->prefix($prefix)
     ->group(function () {
         Route::get('/login', LoginPage::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.login');
+        Route::post('/logout', LogoutController::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.logout');
 
         Route::get('/', function () {
             return view('obelaw::home', [

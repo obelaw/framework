@@ -267,7 +267,10 @@
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <a href="{{ route('obelaw.account.settings') }}"
                                 class="dropdown-item">{{ __('obelaw::layout.settings') }}</a>
-                            <a href="./sign-in.html" class="dropdown-item">{{ __('obelaw::layout.logout') }}</a>
+                            <a href="{{ route('obelaw.admin.logout') }}" onclick="event.preventDefault(); document.getElementById('form-logout').submit();" class="dropdown-item">{{ __('obelaw::layout.logout') }}</a>
+                            <form id="form-logout" action="{{ route('obelaw.admin.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
