@@ -3,7 +3,7 @@
     <div class="col">
         <select class="form-select @error($model) is-invalid @enderror" wire:model.defer="{{ $model }}"
             {{ $attributes }} @if ($multiple) multiple @endif
-            @if ($selected) wire:change="{{ $selected }}()" @endif>
+            @if ($selected) wire:change="{{ $selected }}()" @endif id="select_{{ $model }}">
             <option value="null">{{ __('obelaw::builder.form.select') }}...</option>
             @foreach ($options as $option)
                 <option value="{{ $option['value'] }}">
@@ -18,3 +18,20 @@
         @endif
     </div>
 </div>
+
+@push('scripts')
+    <script>
+        Livewire.on('setOptions', event => {
+            if (event.toModel == '{{ $model }}') {
+
+                var htmlOptions = '<option value="null">{{ __('obelaw::builder.form.select') }}...</option>';
+
+                event.options.forEach(option => {
+                    htmlOptions += '<option value="' + option.value + '">' + option.label + '</option>';
+                });
+
+                document.getElementById('select_{{ $model }}').innerHTML = htmlOptions;
+            }
+        });
+    </script>
+@endpush
