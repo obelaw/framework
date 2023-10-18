@@ -13,7 +13,7 @@
 
             @if ($field['type'] == 'select')
                 <x-obelaw-select-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :options="$field['options']"
-                    :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" :multiple="$field['multiple']" />
+                    :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" :multiple="$field['multiple']" :selected="$field['selected'] ?? false" />
             @endif
 
             @if ($field['type'] == 'textarea')

@@ -15,6 +15,7 @@ class SelectField extends Component
         public $hint = null,
         public $required = false,
         public $multiple = false,
+        public $selected = false,
     ) {
         $this->label = Str::contains($label, '::forms') ? __($label) : $label;
         $this->placeholder = Str::contains($placeholder, '::forms') ? __($placeholder) : $placeholder;
