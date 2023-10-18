@@ -51,9 +51,7 @@ class ObelawServiceProvider extends ServiceProviderBase
             ], config('auth.providers.obelaw', [])),
         ]);
 
-        $this->app->bind('bundles', function ($app) {
-            return new BundlesManagement();
-        });
+        $this->app->singleton('bundles', BundlesManagement::class);
 
         Languages::setLanguage('ar', 'العربية');
     }
