@@ -11,6 +11,7 @@ class CheckboxField extends Component
         public $label = 'set label',
         public $placeholder = '',
         public $model = 'set name',
+        public $options = null,
         public $hint = null,
         public $required = false,
     ) {

@@ -27,8 +27,8 @@
             @endif
 
             @if ($field['type'] == 'checkbox')
-                <x-obelaw-checkbox-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :hint="$field['hint']"
-                    :required="str_contains($field['rules'], 'required')" />
+                <x-obelaw-checkbox-field label="{{ $field['label'] }}" model="{{ $field['model'] }}" :options="$field['options'] ?? null"
+                    :hint="$field['hint']" :required="str_contains($field['rules'], 'required')" />
             @endif
         @endforeach
 
