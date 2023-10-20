@@ -27,8 +27,14 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
         Route::post('/logout', LogoutController::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.logout');
 
         Route::get('/', function () {
+
+            $modules = collect(Bundles::getModules());
+            $mainModules = $modules->where('helper', false)->all();
+            $helperModules = $modules->where('helper', true)->all();
+
             return view('obelaw::home', [
-                'modules' => array_values(Bundles::getModules())
+                'modules' => $mainModules,
+                'helperModules' => $helperModules,
             ]);
         })->name('obelaw.home');
 

@@ -35,6 +35,33 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="hr-text hr-text-left">Helper Modules</div>
+
+            <div class="row row-cards">
+                @foreach ($helperModules as $module)
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="card card-sm">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <span class="bg-white text-black avatar">
+                                            @svg('tabler-' . $module['icon'], 'w-5 h-5')
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="font-weight-medium">
+                                            <a href="{{ route($module['href']) }}" class="text-black">
+                                                {{ \Illuminate\Support\Str::contains($module['name'], '::') ? __($module['name']) : $module['name'] }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 </x-obelaw-dashboard-layout>

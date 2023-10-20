@@ -24,7 +24,8 @@ class DashboardLayout extends Component
      */
     public function __construct()
     {
-        $this->modules = Bundles::getModules();
+        $modules = collect(Bundles::getModules());
+        $this->modules = $modules->where('helper', false)->all();
     }
 
     /**
