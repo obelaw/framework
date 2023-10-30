@@ -4,6 +4,7 @@ namespace Obelaw\Framework;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Livewire\Livewire;
 use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
@@ -64,6 +65,8 @@ class ObelawServiceProvider extends ServiceProviderBase
     public function boot(Router $router)
     {
         //
+        Blade::directive('currency', fn () => 'EGP');
+
         $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
         $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
 
