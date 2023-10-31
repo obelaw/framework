@@ -9,11 +9,18 @@ use Obelaw\Framework\Facades\Bundles;
 class DashboardLayout extends Component
 {
     /**
-     * The alert message.
+     * The list of modules.
      *
-     * @var string
+     * @var array
      */
-    public $modules;
+    public $modules = null;
+
+    /**
+     * The list of helper modules.
+     *
+     * @var array
+     */
+    public $helperModules = null;
 
     /**
      * Create the component instance.
@@ -26,8 +33,8 @@ class DashboardLayout extends Component
     {
         $modules = collect(Bundles::getModules());
         $this->modules = $modules->where('helper', false)->all();
+        $this->helperModules = $modules->where('helper', true)->all();
     }
-
     /**
      * Get the view / contents that represents the component.
      */
