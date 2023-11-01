@@ -72,7 +72,7 @@
                                             @foreach ($grid->getLabels() as $label)
                                                 <th>{{ $label }}</th>
                                             @endforeach
-                                            <th width="15%"></th>
+                                            <th width="21%"></th>
                                         </tr>
                                     </thead>
                                     <tbody>

@@ -23,7 +23,7 @@ abstract class GridBase extends Component
     {
         $grid = Bundles::getGrids($this->gridId);
 
-        $gridBuild = Grid::model($grid['model']);
+        $gridBuild = Grid::model($grid['model'], $grid['where']);
 
         $gridBuild->setBottoms($grid['bottoms']);
 

@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Builder\Grid;
 
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class Table
 {
@@ -11,12 +12,14 @@ class Table
     public $bottoms = null;
     public $setCTAs = null;
     public $model = null;
+    public $where = null;
     public $filter = null;
     public $links = null;
 
-    public function __construct($model)
+    public function __construct($model, $where = null)
     {
         $this->model = $model;
+        $this->where = $where;
     }
 
     public function addColumn($label, $dataKey, $filter = null)
@@ -61,7 +64,11 @@ class Table
 
     public function getRows()
     {
-        $model = (new $this->model)->paginate(25);
+        $model = (new $this->model)->where(function (Builder $query) {
+            if ($this->where) {
+                $query->where((new $this->where)->where($query));
+            }
+        })->paginate(25);
 
         $this->links = $model->links();
 

@@ -6,8 +6,8 @@ use Obelaw\Framework\Builder\Grid\Table;
 
 class Grid
 {
-    public static function model($model = null)
+    public static function model($model = null, $where = null)
     {
-        return new Table($model);
-    } 
+        return new Table($model, $where);
+    }
 }
