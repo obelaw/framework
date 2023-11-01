@@ -4,6 +4,7 @@
     $files = [
         'amount.php',
         'bundles.php',
+        'string.php',
     ];
 
     foreach ($files as $file) {
