@@ -18,6 +18,7 @@ use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
 use Obelaw\Framework\Pipeline\Bundles\BundlesManagement;
 use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
+use Obelaw\Framework\Utils\Currency;
 use Obelaw\Framework\Views\Builder\Form\CheckboxField;
 use Obelaw\Framework\Views\Builder\Form\DateField;
 use Obelaw\Framework\Views\Builder\Form\SelectField;
@@ -65,7 +66,7 @@ class ObelawServiceProvider extends ServiceProviderBase
     public function boot(Router $router)
     {
         //
-        Blade::directive('currency', fn () => 'EGP');
+        Blade::directive('currency', fn () => Currency::symbol());
 
         $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
         $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
