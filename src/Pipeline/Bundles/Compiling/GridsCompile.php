@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Builder\Build\Grid\Bottom;
 use Obelaw\Framework\Builder\Build\Grid\CTA;
 use Obelaw\Framework\Builder\Build\Grid\Table;
-use Obelaw\Framework\Contracts\Builder\Grid\WhereBuilder;
+// use Obelaw\Framework\Contracts\Builder\Grid\WhereBuilder;
 
 class GridsCompile
 {
@@ -29,15 +29,6 @@ class GridsCompile
                     $gridClass = include($filename);
                     $gridClass = new $gridClass;
 
-                    if (property_exists($gridClass, 'where')) {
-
-                        if (!new $gridClass->where instanceof WhereBuilder) {
-                            throw new \Exception('This `' . $gridClass->where . '` must have `WhereBuilder`');
-                        }
-
-                        $where = $gridClass->where;
-                    }
-
                     //Columns class
                     $table = new Table;
                     $CTA = new CTA;
@@ -52,7 +43,7 @@ class GridsCompile
 
                     $_grid[$id . '_' . basename($filename, '.php')] = [
                         'model' => $gridClass->model(),
-                        'where' => $where ?? null,
+                        'where' => (property_exists($gridClass, 'where')) ? $gridClass->where : null,
                         'filter' => (method_exists($gridClass, 'filter')) ? $gridClass->filter() : null,
                         'bottoms' => $bottom->getBottoms(),
                         'rows' => $table->getColumns(),
