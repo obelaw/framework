@@ -21,6 +21,7 @@
             <div class="row row-cards">
                 <div class="col-12">
                     <x-obelaw-form-builder id="{{ $formId }}" />
+                    <x-obelaw-loading />
                 </div>
             </div>
         </div>

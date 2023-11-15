@@ -93,7 +93,8 @@
 
                                                     @if ($canRemoveRow)
                                                         <button class="btn btn-sm btn-danger"
-                                                            wire:click="removeRow({{ $row['primary'] }})">{{ __('obelaw::builder.grids.remove') }}</button>
+                                                            wire:click="removeRow({{ $row['primary'] }})"
+                                                            onclick="return confirm('Are you sure you want to remove?') || event.stopImmediatePropagation();">{{ __('obelaw::builder.grids.remove') }}</button>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -110,4 +111,5 @@
             </div>
         </div>
     </div>
+    <x-obelaw-loading />
 </div>
