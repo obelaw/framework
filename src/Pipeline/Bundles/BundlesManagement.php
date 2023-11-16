@@ -146,6 +146,11 @@ class BundlesManagement
         );
     }
 
+    public function getProviders()
+    {
+        return Cache::get($this->getCachePrefix() . 'obelawProviders');
+    }
+
     /**
      * Get the value of at install
      */

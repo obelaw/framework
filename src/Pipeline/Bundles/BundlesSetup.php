@@ -5,6 +5,7 @@ namespace Obelaw\Framework\Pipeline\Bundles;
 use Obelaw\Framework\BundleRegistrar;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\ACLCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Configurations\ProvidersCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\FormsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\GridsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
@@ -89,6 +90,10 @@ class BundlesSetup
                 $compileObj = new $compile($cachePrefix);
                 $compileObj->manage($this->pluginsPaths);
             }
+        }
+
+        if ($allProviders = BundleRegistrar::getProviders()) {
+            (new ProvidersCompile($cachePrefix))->manage($allProviders);
         }
     }
 }
