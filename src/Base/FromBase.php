@@ -12,6 +12,8 @@ abstract class FromBase extends Component
 {
     use LivewireAlert;
 
+    public $models = null;
+
     protected $pretitle = 'Pre Title';
     protected $title = 'Title';
 
@@ -20,10 +22,15 @@ abstract class FromBase extends Component
     public function boot()
     {
         $this->fields = Bundles::getForms($this->formId);
+        $this->subfotms = Bundles::getSubForms($this->formId);
+
+        $models = [];
 
         foreach ($this->fields as $field) {
-            $this->{$field['model']} = $field['value'] ?? null;
+            $models[$field['model']] = $field['value'] ?? null;
         }
+
+        $this->models = $models;
     }
 
     public function preTitle()
@@ -41,7 +48,7 @@ abstract class FromBase extends Component
         $data = [];
 
         foreach ($this->fields as $field) {
-            $data[$field['model']] = $field['rules'];
+            $data['models.'.$field['model']] = $field['rules'];
         }
 
         return $data;

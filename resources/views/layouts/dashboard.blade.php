@@ -31,7 +31,7 @@
         }
     </style>
 
-    @livewireStyles
+    {{-- @livewireStyles --}}
 
     @stack('styles')
 </head>
