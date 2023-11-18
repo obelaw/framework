@@ -5,6 +5,7 @@
         'amount.php',
         'bundles.php',
         'string.php',
+        'permissions.php',
     ];
 
     foreach ($files as $file) {
