@@ -11,7 +11,7 @@ return new class extends MigrationBase
      */
     public function up(): void
     {
-        Schema::create($this->prefix . 'rules', function (Blueprint $table) {
+        Schema::create($this->prefix . 'admin_rules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->json('permissions');
@@ -24,6 +24,6 @@ return new class extends MigrationBase
      */
     public function down(): void
     {
-        Schema::dropIfExists($this->prefix . 'rules');
+        Schema::dropIfExists($this->prefix . 'admin_rules');
     }
 };

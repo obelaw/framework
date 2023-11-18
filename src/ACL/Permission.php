@@ -13,7 +13,7 @@ class Permission
 
     public static function authHavePermissions()
     {
-        return auth()->guard('obelaw')->user()->rule->permission->permissions;
+        return auth()->guard('obelaw')->user()->rule->permissions;
     }
 
     public static function hasPermission($permission, $permissions)

@@ -17,7 +17,7 @@ class PermissionMiddleware
     public function handle(Request $request, Closure $next)
     {
         abort_if(!auth()->guard('obelaw')->check(), redirect(route('obelaw.admin.login')));
-        abort_if(!auth()->guard('obelaw')->user()->rule, 401);
+        abort_if(auth()->guard('obelaw')->user()->status === 'inactive', 401);
 
         return $next($request);
     }
