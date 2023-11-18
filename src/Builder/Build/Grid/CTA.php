@@ -17,4 +17,18 @@ class CTA
     {
         return $this->calls;
     }
+
+    public static function call(
+        string $route,
+        string $type = 'route',
+        string $color = 'primary',
+        string $permission = null,
+    ) {
+        return [
+            'type' => $type,
+            'color' => $color,
+            'route' => $route,
+            'permission' => $permission,
+        ];
+    }
 }

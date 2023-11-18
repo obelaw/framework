@@ -17,17 +17,12 @@
                     <div class="btn-list">
                         @empty(!$grid->bottoms)
                             @foreach ($grid->bottoms as $bottom)
-                                <a href="{{ route($bottom['route']) }}" class="btn btn-primary d-none d-sm-inline-block">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M12 5l0 14" />
-                                        <path d="M5 12l14 0" />
-                                    </svg>
-                                    {{ \Illuminate\Support\Str::contains($bottom['label'], '::grids') ? __($bottom['label']) : $bottom['label'] }}
-                                </a>
+                                @if (isset($bottom['permission']) && hasPermission($bottom['permission']))
+                                    <a href="{{ route($bottom['route']) }}" class="btn btn-primary d-none d-sm-inline-block">
+                                        @svg('tabler-' . $bottom['icon'], 'icon')
+                                        {{ \Illuminate\Support\Str::contains($bottom['label'], '::grids') ? __($bottom['label']) : $bottom['label'] }}
+                                    </a>
+                                @endif
                             @endforeach
                         @endempty
                     </div>
@@ -83,11 +78,13 @@
                                                 @endforeach
                                                 <td align="right">
                                                     @foreach ($row['calls'] as $call => $action)
-                                                        @if ($action['type'] == 'route')
-                                                            <a class="btn btn-sm btn-{{ $action['color'] ?? 'primary' }}"
-                                                                href="{{ route($action['route'], [$row['primary']]) }}">
-                                                                {{ \Illuminate\Support\Str::contains($call, '::grids') ? __($call) : $call }}
-                                                            </a>
+                                                        @if (isset($action['permission']) && hasPermission($action['permission']))
+                                                            @if ($action['type'] == 'route')
+                                                                <a class="btn btn-sm btn-{{ $action['color'] }}"
+                                                                    href="{{ route($action['route'], [$row['primary']]) }}">
+                                                                    {{ \Illuminate\Support\Str::contains($call, '::grids') ? __($call) : $call }}
+                                                                </a>
+                                                            @endif
                                                         @endif
                                                     @endforeach
 

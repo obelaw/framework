@@ -6,12 +6,13 @@ class Bottom
 {
     public $bottoms = [];
 
-    public function setBottom($label, $route, $icon = null)
+    public function setBottom($label, $route, $icon = 'plus', $permission = null)
     {
         $bottom = [
             'label' => $label,
             'route' => $route,
             'icon' => $icon,
+            'permission' => $permission,
         ];
 
         array_push($this->bottoms, $bottom);
