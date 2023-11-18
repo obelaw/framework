@@ -2,33 +2,20 @@
 
 namespace Obelaw\Framework\Builder\Build\Grid;
 
+use Obelaw\Framework\Builder\Build\Common\ActionButton;
+
 class CTA
 {
     public $calls = [];
 
-    public function setCall($label, $route)
+    public function setCall($label, ActionButton $actionButton)
     {
-        $this->calls = array_merge($this->calls, [$label => $route]);
-
+        $this->calls = array_merge($this->calls, [$label => $actionButton->getButton()]);
         return $this;
     }
 
     public function getCalls()
     {
         return $this->calls;
-    }
-
-    public static function call(
-        string $route,
-        string $type = 'route',
-        string $color = 'primary',
-        string $permission = null,
-    ) {
-        return [
-            'type' => $type,
-            'color' => $color,
-            'route' => $route,
-            'permission' => $permission,
-        ];
     }
 }
