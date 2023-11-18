@@ -5,12 +5,14 @@ namespace Obelaw\Framework\Base;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Obelaw\Framework\ACL\Traits\BootPermission;
 use Obelaw\Framework\Builder\Grid;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class GridBase extends Component
 {
+    use BootPermission;
     use WithPagination;
 
     protected $pretitle = 'Pre Title';
@@ -21,6 +23,8 @@ abstract class GridBase extends Component
 
     public function boot()
     {
+        $this->bootPermission();
+
         $grid = Bundles::getGrids($this->gridId);
 
         $gridBuild = Grid::model($grid['model'], $grid['where']);
