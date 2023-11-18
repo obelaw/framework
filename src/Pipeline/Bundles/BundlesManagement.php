@@ -132,6 +132,14 @@ class BundlesManagement
     }
 
     /**
+     * Get the value of ACLs
+     */
+    public function getACLs()
+    {
+        return Cache::get($this->getCachePrefix() . 'obelawACLs');
+    }
+
+    /**
      * Get the value of migrations
      */
     public function getMigrations()

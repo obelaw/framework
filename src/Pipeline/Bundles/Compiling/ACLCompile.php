@@ -30,7 +30,7 @@ class ACLCompile
 
     public function cache($ACLs)
     {
-        Cache::forever($this->cachePrefix . 'obelawACL', $ACLs);
+        Cache::forever($this->cachePrefix . 'obelawACLs', $ACLs);
     }
 
     public function manage($paths)
