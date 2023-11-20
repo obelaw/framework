@@ -13,11 +13,13 @@ return new class extends MigrationBase
     {
         Schema::create($this->prefix . 'admins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('rule_id')->constrained($this->prefix . 'admin_rules')->cascadeOnDelete();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
             $table->string('lang', 2)->default('en');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

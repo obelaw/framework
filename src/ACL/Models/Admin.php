@@ -8,17 +8,17 @@ use Obelaw\Framework\Base\ModelConnection;
 
 class Admin extends Authenticatable
 {
-    use HasACL;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
+        'rule_id',
         'name',
         'email',
         'password',
+        'status',
     ];
 
     /**
@@ -35,5 +35,10 @@ class Admin extends Authenticatable
         }
 
         $this->setTable(config('obelaw.database.table_prefix', 'obelaw_') . $this->getTable());
+    }
+
+    public function rule()
+    {
+        return $this->hasOne(Rule::class, 'id', 'rule_id');
     }
 }

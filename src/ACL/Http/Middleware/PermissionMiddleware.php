@@ -3,9 +3,7 @@
 namespace Obelaw\Framework\ACL\Http\Middleware;
 
 use Closure;
-use Exception;
 use Illuminate\Http\Request;
-use Obelaw\Framework\ACL\Permission;
 
 class PermissionMiddleware
 {
@@ -16,12 +14,11 @@ class PermissionMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $permission = false)
+    public function handle(Request $request, Closure $next)
     {
         abort_if(!auth()->guard('obelaw')->check(), redirect(route('obelaw.admin.login')));
+        abort_if(auth()->guard('obelaw')->user()->status === 'inactive', 401);
 
-        if (Permission::verify($permission)) {
-            return $next($request);
-        }
+        return $next($request);
     }
 }
