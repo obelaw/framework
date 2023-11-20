@@ -3,7 +3,7 @@
 namespace Obelaw\Framework\ACL\Traits;
 
 use Exception;
-use Obelaw\Framework\ACL\Attributes\PermissionAttribute;
+use Obelaw\Framework\ACL\Attributes\PermissionAccess;
 use Obelaw\Framework\ACL\Permission;
 use ReflectionClass;
 
@@ -17,7 +17,7 @@ trait BootPermission
     public function bootPermission()
     {
         $reflection = new ReflectionClass($this);
-        $reflectionPermissions = $reflection->getAttributes(PermissionAttribute::class);
+        $reflectionPermissions = $reflection->getAttributes(PermissionAccess::class);
 
         if (empty($reflectionPermissions)) {
             throw new Exception('This component does not have a permission attribute');
