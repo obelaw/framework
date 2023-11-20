@@ -5,10 +5,13 @@ namespace Obelaw\Framework\Base;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Obelaw\Framework\ACL\Attributes\PermissionDelete;
+use Obelaw\Framework\ACL\Permission;
 use Obelaw\Framework\ACL\Traits\BootPermission;
 use Obelaw\Framework\Builder\Grid;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
+use ReflectionMethod;
 
 abstract class GridBase extends Component
 {
@@ -57,7 +60,25 @@ abstract class GridBase extends Component
             'pretitle' => $this->preTitle(),
             'title' => $this->title(),
             'grid' => $this->grid,
-            'canRemoveRow' => method_exists($this, 'removeRow'),
+            'canRemoveRow' => $this->canRemoveRow(),
         ])->layout(DashboardLayout::class);
+    }
+
+    private function canRemoveRow()
+    {
+        if (!method_exists($this, 'removeRow')) {
+            return false;
+        }
+
+        $constructor = new ReflectionMethod($this, 'removeRow');
+        $attributes = $constructor->getAttributes(PermissionDelete::class);
+
+        foreach ($attributes as $attribute) {
+            if (!Permission::verify($attribute->getArguments()[0])) {
+                return false;
+            }
+        }
+
+        return false;
     }
 }
