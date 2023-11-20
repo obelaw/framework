@@ -3,6 +3,7 @@
 namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
 
 use Illuminate\Support\Facades\Cache;
+use Obelaw\Framework\Builder\Build\Permission\Section;
 
 class ACLCompile
 {
@@ -18,10 +19,18 @@ class ACLCompile
         $outACL = [];
 
         foreach ($paths as $id => $path) {
-            $pathNavbarFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'ACL.php';
+            $pathACLFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'ACL.php';
 
-            if (file_exists($pathNavbarFile)) {
-                $outACL = array_merge($outACL, [$id => require $pathNavbarFile]);
+            if (file_exists($pathACLFile)) {
+
+                $ACLClass = include($pathACLFile);
+                $ACLClass = new $ACLClass;
+
+                $section = new Section;
+
+                $ACLClass->permissions($section);
+
+                $outACL = array_merge($outACL, [$id => $section->getSection()]);
             }
         }
 
