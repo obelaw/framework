@@ -6,6 +6,8 @@ use Obelaw\Framework\Base\ModelBase;
 
 class Rule extends ModelBase
 {
+    protected $table = 'admin_rules';
+
     /**
      * The attributes that are mass assignable.
      *

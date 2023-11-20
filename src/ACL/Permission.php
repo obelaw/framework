@@ -6,14 +6,22 @@ class Permission
 {
     public static function verify($permission)
     {
-        abort_if(!auth()->guard('obelaw')->user()->rule, 401);
+        $permissions = static::authHavePermissions();
 
-        $permissions = auth()->guard('obelaw')->user()->rule->permission->permissions;
+        return static::hasPermission($permission, $permissions);
+    }
 
+    public static function authHavePermissions()
+    {
+        return auth()->guard('obelaw')->user()->rule->permissions;
+    }
+
+    public static function hasPermission($permission, $permissions)
+    {
         if ($permissions == ['*']) {
             return true;
         }
 
-        abort_if(!in_array($permission, $permissions), 401);
+        return (in_array($permission, $permissions)) ? true : false;
     }
 }

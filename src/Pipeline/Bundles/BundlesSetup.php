@@ -12,6 +12,7 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\InstallCommandsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\MigrationsCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\NavbarCompile;
+use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\ACLPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\FormsPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\GridsPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\MigrationsPluginCompile;
@@ -57,6 +58,7 @@ class BundlesSetup
             FormsPluginCompile::class,
             GridsPluginCompile::class,
             ViewsPluginCompile::class,
+            ACLPluginCompile::class,
             MigrationsPluginCompile::class,
         ];
     }

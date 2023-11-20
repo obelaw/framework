@@ -5,11 +5,13 @@ namespace Obelaw\Framework\Base;
 use Illuminate\Support\Str;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
+use Obelaw\Framework\ACL\Traits\BootPermission;
 use Obelaw\Framework\Facades\Bundles;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class FromBase extends Component
 {
+    use BootPermission;
     use LivewireAlert;
 
     protected $pretitle = 'Pre Title';
@@ -19,6 +21,8 @@ abstract class FromBase extends Component
 
     public function boot()
     {
+        $this->bootPermission();
+
         $this->fields = Bundles::getForms($this->formId);
 
         foreach ($this->fields as $field) {

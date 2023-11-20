@@ -19,20 +19,16 @@ final class AddDefaultAdminCommand extends Command
             $email = 'admin@obelaw.test';
             $password = '123456';
 
-            $admin = Admin::create([
-                'name' => 'Super Admin',
-                'email' => $email,
-                'password' => Hash::make($password),
-            ]);
-
             $rule = Rule::create([
                 'name' => 'Super Admin',
                 'permissions' => ['*'],
             ]);
 
-            AdminRule::create([
-                'admin_id' => $admin->id,
+            Admin::create([
                 'rule_id' => $rule->id,
+                'name' => 'Super Admin',
+                'email' => $email,
+                'password' => Hash::make($password),
             ]);
 
             $this->line('<fg=white;bg=blue> OBELAW ADMIN </>');

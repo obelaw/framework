@@ -295,7 +295,7 @@
                                 style="background-image: url(https://www.gravatar.com/avatar/)"></span>
                             <div class="d-none d-xl-block ps-2">
                                 <div>{{ $admin->name }}</div>
-                                <div class="mt-1 small text-muted">{{ $admin->rule->permission->name }}</div>
+                                <div class="mt-1 small text-muted">{{ $admin->rule->name }}</div>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

@@ -1,11 +1,11 @@
 <?php
 
-namespace Obelaw\Framework\Pipeline\Bundles\Compiling;
+namespace Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin;
 
 use Illuminate\Support\Facades\Cache;
 use Obelaw\Framework\Builder\Build\Permission\Section;
 
-class ACLCompile
+class ACLPluginCompile
 {
     public $count = 0;
 
@@ -16,7 +16,7 @@ class ACLCompile
 
     public function merge($paths)
     {
-        $outACL = [];
+        $outACL = Cache::get($this->cachePrefix . 'obelawACLs', []);
 
         foreach ($paths as $id => $path) {
             $pathACLFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'ACL.php';

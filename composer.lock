@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ab165353ef03c07418cb5880f0f7c4b",
+    "content-hash": "0c407e3cbe5188898f52e8dfdc01b9b5",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -1443,6 +1443,43 @@
                 }
             ],
             "time": "2023-05-25T22:09:47+00:00"
+        },
+        {
+            "name": "obelaw/permissions-helper-module",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/obelaw/permissions-helper-module.git",
+                "reference": "28da7bf996235c85e55ef697bc1fabb78affb6f0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/obelaw/permissions-helper-module/zipball/28da7bf996235c85e55ef697bc1fabb78affb6f0",
+                "reference": "28da7bf996235c85e55ef697bc1fabb78affb6f0",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "obelaw.php"
+                ],
+                "psr-4": {
+                    "Obelaw\\Permissions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Karim Mohamed",
+                    "email": "komicho1996@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/obelaw/permissions-helper-module/issues",
+                "source": "https://github.com/obelaw/permissions-helper-module/tree/main"
+            },
+            "time": "2023-11-20T22:25:03+00:00"
         },
         {
             "name": "psr/container",
@@ -3586,7 +3623,7 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,

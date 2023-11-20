@@ -7,12 +7,13 @@ class Links
     private $links = [];
     private $pushlinks = [];
 
-    public function link($icon, $label, $href)
+    public function link($icon, $label, $href, $permission = null)
     {
         $link = [
             'icon' => $icon,
             'label' => $label,
-            'href' => $href
+            'href' => $href,
+            'permission' => $permission,
         ];
 
         array_push($this->links, $link);
@@ -20,12 +21,13 @@ class Links
         return $this;
     }
 
-    public function pushLink($to, $icon, $label, $href)
+    public function pushLink($to, $icon, $label, $href, $permission = null)
     {
         $link[$to] = [
             'icon' => $icon,
             'label' => $label,
-            'href' => $href
+            'href' => $href,
+            'permission' => $permission,
         ];
 
         $this->pushlinks = array_merge($this->pushlinks, $link);
@@ -33,7 +35,7 @@ class Links
         return $this;
     }
 
-    public function subLinks($icon, $label, $links, $id = null)
+    public function subLinks($icon, $label, $links, $id = null, $permission = null)
     {
         $sub = new SubLinks;
 
@@ -43,6 +45,7 @@ class Links
             'id' => $id,
             'icon' => $icon,
             'label' => $label,
+            'permission' => $permission,
             'sublinks' => $sub->getLinks(),
         ];
 
