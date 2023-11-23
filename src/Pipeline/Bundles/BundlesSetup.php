@@ -3,15 +3,8 @@
 namespace Obelaw\Framework\Pipeline\Bundles;
 
 use Obelaw\Framework\BundleRegistrar;
-use Obelaw\Framework\Facades\Bundles;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\ACLCompile;
+use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Configurations\ProvidersCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\FormsCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\GridsCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\InfoCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\InstallCommandsCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\MigrationsCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\NavbarCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\ACLPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\FormsPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\GridsPluginCompile;
@@ -20,15 +13,13 @@ use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\NavbarPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\PluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\RoutesPluginCompile;
 use Obelaw\Framework\Pipeline\Bundles\Compiling\Plugin\ViewsPluginCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\RoutesCompile;
-use Obelaw\Framework\Pipeline\Bundles\Compiling\ViewsCompile;
 
 class BundlesSetup
 {
     public function __construct(
         public $modulesPaths = [],
         public $pluginsPaths = [],
-        private $compiles = [],
+        private $pluginCompiles = [],
     ) {
 
         if (ExternalDirectory::hasDirectory()) {
@@ -38,18 +29,6 @@ class BundlesSetup
         $this->modulesPaths = BundleRegistrar::getPaths(BundleRegistrar::MODULE);
 
         $this->pluginsPaths = BundleRegistrar::getPaths(BundleRegistrar::PLUGIN);
-
-        $this->compiles = [
-            InfoCompile::class,
-            FormsCompile::class,
-            GridsCompile::class,
-            ViewsCompile::class,
-            RoutesCompile::class,
-            NavbarCompile::class,
-            ACLCompile::class,
-            MigrationsCompile::class,
-            InstallCommandsCompile::class,
-        ];
 
         $this->pluginCompiles = [
             PluginCompile::class,
@@ -80,11 +59,6 @@ class BundlesSetup
             foreach ($pluginsInactives as $pluginUnactive) {
                 unset($this->pluginsPaths[$pluginUnactive]);
             }
-        }
-
-        foreach ($this->compiles as $compile) {
-            $compileObj = new $compile($cachePrefix);
-            $compileObj->manage($this->modulesPaths);
         }
 
         if ($this->pluginsPaths) {

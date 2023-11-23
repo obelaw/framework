@@ -4,7 +4,7 @@ namespace Obelaw\Framework\Views\Builder;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
-use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Pipeline\Identification\Identifier;
 
 class NavbarBuilder extends Component

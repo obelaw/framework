@@ -4,7 +4,7 @@ namespace Obelaw\Framework\Base;
 
 use Illuminate\Support\Str;
 use Livewire\Component;
-use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 abstract class ViewBase extends Component

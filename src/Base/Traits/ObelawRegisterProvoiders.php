@@ -2,7 +2,7 @@
 
 namespace Obelaw\Framework\Base\Traits;
 
-use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Facades\Bundles;
 
 trait ObelawRegisterProvoiders
 {

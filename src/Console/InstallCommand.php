@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Obelaw\Framework\Console;
 
 use Illuminate\Console\Command;
-use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Facades\Bundles;
 
 final class InstallCommand extends Command
 {

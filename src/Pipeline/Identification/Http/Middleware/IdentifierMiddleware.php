@@ -5,7 +5,7 @@ namespace Obelaw\Framework\Pipeline\Identification\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-use Obelaw\Framework\Facades\Bundles;
+use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Pipeline\Identification\Identifier;
 
 class IdentifierMiddleware
