@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45666b12db6861d812de7a27a1a80d82",
+    "content-hash": "7fafbbcf55b25592b8d3785e0ef6c1f3",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -875,12 +875,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "99d21f37f100b0c5b6a8d09ab0ed86aad3f4a6c8"
+                "reference": "38b897f5d3c97cca88078b6a37878d812aeb79de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/99d21f37f100b0c5b6a8d09ab0ed86aad3f4a6c8",
-                "reference": "99d21f37f100b0c5b6a8d09ab0ed86aad3f4a6c8",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/38b897f5d3c97cca88078b6a37878d812aeb79de",
+                "reference": "38b897f5d3c97cca88078b6a37878d812aeb79de",
                 "shasum": ""
             },
             "require": {
@@ -1070,7 +1070,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-11-23T15:30:34+00:00"
+            "time": "2023-11-24T14:39:25+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2109,23 +2109,22 @@
         },
         {
             "name": "obelaw/o-engine",
-            "version": "dev-main",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/obelaw/o-engine.git",
-                "reference": "8bcd69685163343ad8934ccff98e9c5f7c0728dd"
+                "reference": "979a94a6f903999b857262987c762789d69768b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/obelaw/o-engine/zipball/8bcd69685163343ad8934ccff98e9c5f7c0728dd",
-                "reference": "8bcd69685163343ad8934ccff98e9c5f7c0728dd",
+                "url": "https://api.github.com/repos/obelaw/o-engine/zipball/979a94a6f903999b857262987c762789d69768b2",
+                "reference": "979a94a6f903999b857262987c762789d69768b2",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "^10.0",
                 "php": "^8.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -2152,9 +2151,9 @@
             "description": "O this our engine for compiling and rendering obelaw modules",
             "support": {
                 "issues": "https://github.com/obelaw/o-engine/issues",
-                "source": "https://github.com/obelaw/o-engine/tree/main"
+                "source": "https://github.com/obelaw/o-engine/tree/1.0.0"
             },
-            "time": "2023-11-23T23:13:40+00:00"
+            "time": "2023-11-25T20:42:09+00:00"
         },
         {
             "name": "obelaw/permissions-helper-module",
@@ -2192,6 +2191,58 @@
                 "source": "https://github.com/obelaw/permissions-helper-module/tree/main"
             },
             "time": "2023-11-20T22:25:03+00:00"
+        },
+        {
+            "name": "obelaw/ui",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/obelaw/ui.git",
+                "reference": "a35f7888f286b5501d9c01903fa14763209c26cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/obelaw/ui/zipball/a35f7888f286b5501d9c01903fa14763209c26cf",
+                "reference": "a35f7888f286b5501d9c01903fa14763209c26cf",
+                "shasum": ""
+            },
+            "require": {
+                "jantinnerezo/livewire-alert": "^2.2",
+                "laravel/framework": "^10.0",
+                "livewire/livewire": "^2.12",
+                "obelaw/o-engine": "^1.0",
+                "php": "^8.1",
+                "ryangjchandler/blade-tabler-icons": "^2.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Obelaw\\UI\\ObelawUIServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Obelaw\\UI\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Karim Mohamed",
+                    "email": "komicho1996@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/obelaw/ui/issues",
+                "source": "https://github.com/obelaw/ui/tree/main"
+            },
+            "time": "2023-11-25T20:53:29+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -5317,7 +5368,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "obelaw/permissions-helper-module": 20
+        "obelaw/permissions-helper-module": 20,
+        "obelaw/ui": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
