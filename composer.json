@@ -16,9 +16,6 @@
         }
     ],
     "require": {
-        "ryangjchandler/blade-tabler-icons": "^2.0",
-        "livewire/livewire": "^2.12",
-        "jantinnerezo/livewire-alert": "^2.2",
         "obelaw/permissions-helper-module": "dev-main"
     },
     "extra": {
@@ -27,6 +24,5 @@
                 "Obelaw\\Framework\\ObelawServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
