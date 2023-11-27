@@ -15,10 +15,8 @@ use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
-use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Utils\Currency;
-use Obelaw\Framework\Views\Builder\NavbarBuilder;
 use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Components\Loading;
 
@@ -60,7 +58,6 @@ class ObelawServiceProvider extends ServiceProviderBase
         Blade::directive('currency', fn () => Currency::symbol());
 
         $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
-        $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 
@@ -98,7 +95,7 @@ class ObelawServiceProvider extends ServiceProviderBase
         return [
             // DashboardLayout::class,
             // FormBuilder::class,
-            NavbarBuilder::class,
+            // NavbarBuilder::class,
 
             Amount::class,
             Loading::class,

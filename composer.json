@@ -16,8 +16,7 @@
         }
     ],
     "require": {
-        "obelaw/permissions-helper-module": "dev-main",
-        "obelaw/ui": "dev-main"
+        "obelaw/permissions-helper-module": "dev-main"
     },
     "extra": {
         "laravel": {
@@ -25,6 +24,5 @@
                 "Obelaw\\Framework\\ObelawServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
