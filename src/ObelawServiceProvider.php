@@ -16,6 +16,7 @@ use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
 use Obelaw\Framework\Pipeline\Locale\Languages;
+use Obelaw\Framework\Reporting\ExceptionReport;
 use Obelaw\Framework\Utils\Currency;
 use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Components\Loading;
@@ -45,6 +46,8 @@ class ObelawServiceProvider extends ServiceProviderBase
         ]);
 
         Languages::setLanguage('ar', 'العربية');
+
+        $this->app->bind('obelaw.report', ExceptionReport::class);
     }
 
     /**
