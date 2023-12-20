@@ -32,7 +32,7 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
         Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
 
         try {
-            foreach (Bundles::getRoutes() as $id => $routes) {
+            foreach (Bundles::getDashboardRoutes() as $id => $routes) {
                 Route::middleware('obelawIdentifier:' . $id)
                     ->group($routes);
             }
