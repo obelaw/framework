@@ -5,7 +5,7 @@ namespace Obelaw\Framework\Livewire\Account;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Obelaw\Framework\Pipeline\Locale\Languages;
-use Obelaw\UI\Views\Layout\DashboardLayout;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 class SettingsPage extends Component
 {

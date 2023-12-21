@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Obelaw\Framework\Console;
 
 use Illuminate\Console\Command;
-use Obelaw\Facades\Bundles;
+use Obelaw\Framework\Facades\Bundles;
 
 final class MigrateCommand extends Command
 {

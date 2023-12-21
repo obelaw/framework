@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Obelaw\Facades\Bundles;
+use Obelaw\Framework\Facades\Bundles;
 
 /**
  * Call artisan command and return code.

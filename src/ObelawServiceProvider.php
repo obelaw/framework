@@ -15,10 +15,20 @@ use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
+use Obelaw\Framework\Pipeline\Bundles\BundlesManagement;
+use Obelaw\Framework\Pipeline\Identification\Http\Middleware\IdentifierMiddleware;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Utils\Currency;
+use Obelaw\Framework\Views\Builder\Form\CheckboxField;
+use Obelaw\Framework\Views\Builder\Form\DateField;
+use Obelaw\Framework\Views\Builder\Form\SelectField;
+use Obelaw\Framework\Views\Builder\Form\TextareaField;
+use Obelaw\Framework\Views\Builder\Form\TextField;
+use Obelaw\Framework\Views\Builder\FormBuilder;
+use Obelaw\Framework\Views\Builder\NavbarBuilder;
 use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Components\Loading;
+use Obelaw\Framework\Views\Layout\DashboardLayout;
 
 class ObelawServiceProvider extends ServiceProviderBase
 {
@@ -44,6 +54,8 @@ class ObelawServiceProvider extends ServiceProviderBase
             ], config('auth.providers.obelaw', [])),
         ]);
 
+        $this->app->singleton('bundles', BundlesManagement::class);
+
         Languages::setLanguage('ar', 'العربية');
     }
 
@@ -58,6 +70,7 @@ class ObelawServiceProvider extends ServiceProviderBase
         Blade::directive('currency', fn () => Currency::symbol());
 
         $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
+        $router->aliasMiddleware('obelawIdentifier', IdentifierMiddleware::class);
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 
@@ -93,18 +106,18 @@ class ObelawServiceProvider extends ServiceProviderBase
     private function viewComponents(): array
     {
         return [
-            // DashboardLayout::class,
-            // FormBuilder::class,
-            // NavbarBuilder::class,
+            DashboardLayout::class,
+            FormBuilder::class,
+            NavbarBuilder::class,
 
             Amount::class,
             Loading::class,
 
-            // TextField::class,
-            // SelectField::class,
-            // TextareaField::class,
-            // DateField::class,
-            // CheckboxField::class,
+            TextField::class,
+            SelectField::class,
+            TextareaField::class,
+            DateField::class,
+            CheckboxField::class,
         ];
     }
 }
