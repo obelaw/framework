@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66b758f12c1d9f4092d6912d6abe8a61",
+    "content-hash": "97470b2ce2db2d441b896dd68a8f6677",
     "packages": [
         {
             "name": "blade-ui-kit/blade-icons",
@@ -5337,7 +5337,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "obelaw/ui": 10
+        "obelaw/ui": 10,
+        "obelaw/permissions": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
