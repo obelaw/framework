@@ -6,7 +6,6 @@ use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Auth\LogoutController;
 use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
-use Obelaw\UI\Views\Containers\HomePageContainer;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +26,7 @@ Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
         Route::get('/login', LoginPage::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.login');
         Route::post('/logout', LogoutController::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.logout');
 
-        Route::get('/', HomePageContainer::class)->name('obelaw.home');
+        Route::get('/', config('obelaw.ui.containers.home_page'))->name('obelaw.home');
 
         Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
 
