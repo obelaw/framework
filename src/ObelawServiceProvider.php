@@ -2,6 +2,8 @@
 
 namespace Obelaw\Framework;
 
+use Composer\InstalledVersions;
+use Illuminate\Foundation\Console\AboutCommand;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
@@ -11,6 +13,7 @@ use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\MigrateCommand;
+use Obelaw\Framework\Console\OAboutCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
@@ -67,7 +70,10 @@ class ObelawServiceProvider extends ServiceProviderBase
 
         if ($this->app->runningInConsole()) {
 
+            $this->bootAboutCommand();
+
             $this->commands([
+                OAboutCommand::class,
                 InstallCommand::class,
                 SetupCommand::class,
                 MigrateCommand::class,
@@ -106,5 +112,14 @@ class ObelawServiceProvider extends ServiceProviderBase
             // DateField::class,
             // CheckboxField::class,
         ];
+    }
+
+    private function bootAboutCommand()
+    {
+        if (class_exists(AboutCommand::class) && class_exists(InstalledVersions::class)) {
+            AboutCommand::add('Obelaw Environment', [
+                'Obelaw Version' => InstalledVersions::getPrettyVersion('obelaw/framework'),
+            ]);
+        }
     }
 }
