@@ -14,6 +14,7 @@ use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\MigrateCommand;
 use Obelaw\Framework\Console\OAboutCommand;
+use Obelaw\Framework\Console\SeedCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Auth\LoginPage;
@@ -77,6 +78,7 @@ class ObelawServiceProvider extends ServiceProviderBase
                 InstallCommand::class,
                 SetupCommand::class,
                 MigrateCommand::class,
+                SeedCommand::class,
             ]);
 
             $this->publishes([
