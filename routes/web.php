@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Obelaw\Facades\Bundles;
+use Obelaw\Framework\Facades\MiddlewareManager;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
-use Obelaw\Framework\Livewire\Auth\LoginPage;
-use Obelaw\Framework\Livewire\Auth\LogoutController;
-use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +18,9 @@ use Obelaw\Framework\Pipeline\Locale\Http\Middleware\LocaleMiddleware;
 
 $prefix = $prefix ?? 'obelaw';
 
-Route::middleware(['web', 'obelawPermission', LocaleMiddleware::class])
+Route::middleware(MiddlewareManager::getMiddlewares())
     ->prefix($prefix)
     ->group(function () {
-        Route::get('/login', LoginPage::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.login');
-        Route::post('/logout', LogoutController::class)->withoutMiddleware(['obelawPermission', LocaleMiddleware::class])->name('obelaw.admin.logout');
-
         Route::get('/', config('obelaw.ui.containers.home_page'))->name('obelaw.home');
 
         Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');

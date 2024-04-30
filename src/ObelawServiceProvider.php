@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Livewire\Livewire;
-use Obelaw\Framework\ACL\Http\Middleware\PermissionMiddleware;
+use Obelaw\Permissions\Http\Middleware\PermissionMiddleware;
 use Obelaw\Framework\Base\ServiceProviderBase;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\MigrateCommand;
@@ -34,20 +34,6 @@ class ObelawServiceProvider extends ServiceProviderBase
      */
     public function register()
     {
-        config([
-            'auth.guards.obelaw' => array_merge([
-                'driver' => 'session',
-                'provider' => 'obelaw',
-            ], config('auth.guards.store', [])),
-        ]);
-
-        config([
-            'auth.providers.obelaw' => array_merge([
-                'driver' => 'eloquent',
-                'model' => \Obelaw\Framework\ACL\Models\Admin::class,
-            ], config('auth.providers.obelaw', [])),
-        ]);
-
         Languages::setLanguage('ar', 'العربية');
     }
 
