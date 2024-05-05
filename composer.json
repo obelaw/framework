@@ -16,9 +16,9 @@
         }
     ],
     "require": {
-        "obelaw/ui": "^1.0@beta",
-        "obelaw/permissions": "dev-main",
-        "obelaw/o-engine": "^1.0@beta"
+        "obelaw/ui": "*",
+        "obelaw/permissions": "*",
+        "obelaw/o-engine": "^1.0"
     },
     "extra": {
         "laravel": {
