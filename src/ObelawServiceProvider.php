@@ -4,25 +4,28 @@ namespace Obelaw\Framework;
 
 use Composer\InstalledVersions;
 use Illuminate\Foundation\Console\AboutCommand;
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Livewire\Livewire;
-use Obelaw\Permissions\Http\Middleware\PermissionMiddleware;
+use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Base\ServiceProviderBase;
+use Obelaw\Framework\Compiles\Scan\Modules\InstallCompile;
 use Obelaw\Framework\Console\InstallCommand;
 use Obelaw\Framework\Console\MigrateCommand;
 use Obelaw\Framework\Console\OAboutCommand;
 use Obelaw\Framework\Console\SeedCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
-use Obelaw\Framework\Livewire\Auth\LoginPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
+use Obelaw\Framework\Managers\Middlewares;
+use Obelaw\Framework\Mixin\BundlesMixin;
 use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Utils\Currency;
 use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Components\Loading;
+use Obelaw\Render\BundlesScaneers;
+use Obelaw\Schema\Scaneer\Scaneer;
 
 class ObelawServiceProvider extends ServiceProviderBase
 {
@@ -35,6 +38,8 @@ class ObelawServiceProvider extends ServiceProviderBase
     public function register()
     {
         Languages::setLanguage('ar', 'العربية');
+
+        $this->app->singleton('manager.middleware', Middlewares::class);
     }
 
     /**
@@ -42,12 +47,9 @@ class ObelawServiceProvider extends ServiceProviderBase
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        //
         Blade::directive('currency', fn () => Currency::symbol());
-
-        $router->aliasMiddleware('obelawPermission', PermissionMiddleware::class);
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'obelaw');
 
@@ -78,10 +80,15 @@ class ObelawServiceProvider extends ServiceProviderBase
             }
         });
 
-        Livewire::component('obelaw-auth-login', LoginPage::class);
+        // Livewire::component('obelaw-auth-login', LoginPage::class);
+        BundlesScaneers::mergeModuleScaneers(function (Scaneer $scaneers) {
+            $scaneers->add(InstallCompile::class);
+        });
 
         Livewire::component('obelaw-account-settings', SettingsPage::class);
         Livewire::component('obelaw-account-settings-update-password', UpdatePassword::class);
+
+        Bundles::mixin(new BundlesMixin());
     }
 
     private function viewComponents(): array
