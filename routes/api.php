@@ -14,9 +14,7 @@ use Obelaw\Facades\Bundles;
 |
  */
 
-$prefix = $prefix ?? 'obelaw/api';
-
-Route::prefix($prefix)
+Route::prefix(config('obelaw.routes.api_prefix', 'obelaw/api'))
     ->group(function () {
         try {
             foreach (Bundles::getApiRoutes() as $id => $routes) {

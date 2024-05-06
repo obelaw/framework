@@ -4,13 +4,23 @@ namespace Obelaw\Framework;
 
 class Obelaw
 {
-    public static function webRoutes($prefix = null)
+    public static function webRoutes()
     {
-        require __DIR__ . '/../routes/web.php';
+        require self::webPathRoutes();
     }
 
-    public static function apiRoutes($prefix = null)
+    public static function apiRoutes()
     {
-        require __DIR__ . '/../routes/api.php';
+        require self::apiPathRoutes();
+    }
+
+    public static function webPathRoutes()
+    {
+        return __DIR__ . '/../routes/web.php';
+    }
+
+    public static function apiPathRoutes()
+    {
+        return __DIR__ . '/../routes/api.php';
     }
 }

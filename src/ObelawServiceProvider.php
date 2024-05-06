@@ -40,6 +40,11 @@ class ObelawServiceProvider extends ServiceProviderBase
         Languages::setLanguage('ar', 'العربية');
 
         $this->app->singleton('manager.middleware', Middlewares::class);
+
+        $this->mergeConfigFrom(
+            __DIR__ . '/../config/obelaw.php',
+            'obelaw'
+        );
     }
 
     /**
@@ -68,6 +73,10 @@ class ObelawServiceProvider extends ServiceProviderBase
                 MigrateCommand::class,
                 SeedCommand::class,
             ]);
+
+            $this->publishes([
+                __DIR__ . '/../config/obelaw.php' => config_path('obelaw.php'),
+            ], ['obelaw:config']);
 
             $this->publishes([
                 __DIR__ . '/../public/assets' => public_path('vendor/obelaw'),

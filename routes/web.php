@@ -16,10 +16,8 @@ use Obelaw\Framework\Livewire\Account\SettingsPage;
 |
  */
 
-$prefix = $prefix ?? 'obelaw';
-
 Route::middleware(MiddlewareManager::getMiddlewares())
-    ->prefix($prefix)
+    ->prefix(config('obelaw.routes.web_prefix', 'obelaw'))
     ->group(function () {
         Route::get('/', config('obelaw.ui.containers.home_page'))->name('obelaw.home');
 
