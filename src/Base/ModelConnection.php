@@ -4,15 +4,26 @@ namespace Obelaw\Framework\Base;
 
 class ModelConnection
 {
-    public static $connection = null;
+    public static $connection = 'o_connection';
+    public static $database = 'o_connection_database';
 
     public static function setConnection($connection)
     {
-        static::$connection = $connection;
+        session([static::$connection => $connection]);
     }
 
     public static function getConnection()
     {
-        return static::$connection;
+        return session(static::$connection);
+    }
+
+    public static function setDatabase($database)
+    {
+        session([static::$database => $database]);
+    }
+
+    public static function getDatabase()
+    {
+        return session(static::$database);
     }
 }
