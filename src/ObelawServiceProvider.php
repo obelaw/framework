@@ -24,6 +24,7 @@ use Obelaw\Framework\Pipeline\Locale\Languages;
 use Obelaw\Framework\Utils\Currency;
 use Obelaw\Framework\Views\Components\Amount;
 use Obelaw\Framework\Views\Components\Loading;
+use Obelaw\Render\BundlesPool;
 use Obelaw\Render\BundlesScaneers;
 use Obelaw\Schema\Scaneer\Scaneer;
 
@@ -98,6 +99,8 @@ class ObelawServiceProvider extends ServiceProviderBase
         Livewire::component('obelaw-account-settings-update-password', UpdatePassword::class);
 
         Bundles::mixin(new BundlesMixin());
+
+        BundlesPool::setPoolPath(__DIR__ . '/../addons', BundlesPool::LEVELONE);
     }
 
     private function viewComponents(): array
@@ -122,7 +125,7 @@ class ObelawServiceProvider extends ServiceProviderBase
     {
         if (class_exists(AboutCommand::class) && class_exists(InstalledVersions::class)) {
             AboutCommand::add('Obelaw Environment', [
-                'Obelaw Version' => InstalledVersions::getPrettyVersion('obelaw/framework'),
+                'Obelaw Version' => InstalledVersions::getPrettyVersion('obelaw/obelaw'),
             ]);
         }
     }
