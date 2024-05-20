@@ -3,12 +3,12 @@
     "description": "This is Obelaw's framework for building modules",
     "autoload": {
         "psr-4": {
-            "Obelaw\\Framework\\": "src/",
+            "Obelaw\\Framework\\": "packages/framework/src/",
             "Obelaw\\UI\\": "packages/ui/src/",
             "Obelaw\\Permissions\\": "addons/permissions/src/"
         },
         "files": [
-            "helpers/autoload.php",
+            "packages/framework/helpers/autoload.php",
             "addons/permissions/helpers/autoload.php"
         ]
     },
