@@ -18,7 +18,9 @@ class CreateAdminComponent extends FormRender
     public function submit()
     {
         $validateData = $this->getInputs();
-        
+
+        dd($validateData);
+
         $validateData['password'] = Hash::make($validateData['password']);
 
         Admin::create($validateData);
