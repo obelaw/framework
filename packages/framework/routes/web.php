@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Obelaw\Facades\Bundles;
 use Obelaw\Framework\Facades\MiddlewareManager;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
+use Obelaw\Framework\Livewire\ConfigurationsPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ Route::middleware(MiddlewareManager::getMiddlewares())
     ->prefix(config('obelaw.routes.web_prefix', 'obelaw'))
     ->group(function () {
         Route::get('/', config('obelaw.ui.containers.home_page'))->name('obelaw.home');
+
+        Route::get('/configurations', ConfigurationsPage::class)->name('obelaw.configurations');
 
         Route::get('/account/settings', SettingsPage::class)->name('obelaw.account.settings');
 

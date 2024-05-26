@@ -19,7 +19,7 @@ class FormComponent extends Component
      * @param  string  $message
      * @return void
      */
-    public function __construct($id, $choices = null)
+    public function __construct($id, public $title = 'Form', $choices = null)
     {
         $this->fields = Bundles::getFormFields($id);
         $this->tabs = Bundles::getFormTabs($id);
