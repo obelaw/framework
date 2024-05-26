@@ -1,12 +1,15 @@
 {
-    "name": "obelaw/framework",
+    "name": "obelaw/obelaw",
     "description": "This is Obelaw's framework for building modules",
     "autoload": {
         "psr-4": {
-            "Obelaw\\Framework\\": "src/"
+            "Obelaw\\Framework\\": "packages/framework/src/",
+            "Obelaw\\UI\\": "packages/ui/src/",
+            "Obelaw\\Permissions\\": "addons/permissions/src/"
         },
         "files": [
-            "helpers/autoload.php"
+            "packages/framework/helpers/autoload.php",
+            "addons/permissions/helpers/autoload.php"
         ]
     },
     "authors": [
@@ -16,13 +19,18 @@
         }
     ],
     "require": {
-        "obelaw/o-engine": "^1.0",
-        "obelaw/ui": "^1.0"
+        "laravel/framework": "^10.0||^11.0",
+        "livewire/livewire": "^3.3",
+        "jantinnerezo/livewire-alert": "^3.0",
+        "maatwebsite/excel": "^3.1",
+        "obelaw/o-engine": "^1.0"
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Obelaw\\Framework\\ObelawServiceProvider"
+                "Obelaw\\Framework\\ObelawServiceProvider",
+                "Obelaw\\UI\\ObelawUIServiceProvider",
+                "Obelaw\\Permissions\\ObelawPermissionsServiceProvider"
             ]
         }
     },
