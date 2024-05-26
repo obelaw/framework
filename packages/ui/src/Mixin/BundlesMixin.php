@@ -153,4 +153,13 @@ class BundlesMixin
                 ->get('obelawSeeds');
         };
     }
+
+    public function getConfigurations()
+    {
+        return function () {
+            return $this->driver
+                ->setPrefix($this->getCachePrefix())
+                ->get('obelawConfigurations');
+        };
+    }
 }

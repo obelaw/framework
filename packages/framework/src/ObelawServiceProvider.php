@@ -18,6 +18,7 @@ use Obelaw\Framework\Console\SeedCommand;
 use Obelaw\Framework\Console\SetupCommand;
 use Obelaw\Framework\Livewire\Account\SettingsPage;
 use Obelaw\Framework\Livewire\Components\Account\UpdatePassword;
+use Obelaw\Framework\Livewire\ConfigurationsPage;
 use Obelaw\Framework\Managers\Middlewares;
 use Obelaw\Framework\Mixin\BundlesMixin;
 use Obelaw\Framework\Pipeline\Locale\Languages;
@@ -94,7 +95,8 @@ class ObelawServiceProvider extends ServiceProviderBase
         BundlesScaneers::mergeModuleScaneers(function (Scaneer $scaneers) {
             $scaneers->add(InstallCompile::class);
         });
-
+        
+        Livewire::component('obelaw-configurations-page', ConfigurationsPage::class);
         Livewire::component('obelaw-account-settings', SettingsPage::class);
         Livewire::component('obelaw-account-settings-update-password', UpdatePassword::class);
 

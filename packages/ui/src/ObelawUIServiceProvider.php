@@ -9,6 +9,7 @@ use Obelaw\Render\BundlesScaneers;
 use Obelaw\Schema\Scaneer\Scaneer;
 use Obelaw\UI\Compiles\Scan\Appends\NavbarAppendsCompile;
 use Obelaw\UI\Compiles\Scan\Appends\ViewsAppendsCompile;
+use Obelaw\UI\Compiles\Scan\Modules\ConfigurationsCompile;
 use Obelaw\UI\Compiles\Scan\Modules\FormsCompile;
 use Obelaw\UI\Compiles\Scan\Modules\GridsCompile;
 use Obelaw\UI\Compiles\Scan\Modules\MigrationsCompile;
@@ -95,6 +96,7 @@ class ObelawUIServiceProvider extends ServiceProvider
             $scaneers->add(WidgetsCompile::class);
             $scaneers->add(MigrationsCompile::class);
             $scaneers->add(SeedsCompile::class);
+            $scaneers->add(ConfigurationsCompile::class);
         });
 
         BundlesScaneers::mergePluginScaneers(function (Scaneer $scaneers) {
