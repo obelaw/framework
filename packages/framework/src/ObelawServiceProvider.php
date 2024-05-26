@@ -100,7 +100,7 @@ class ObelawServiceProvider extends ServiceProviderBase
 
         Bundles::mixin(new BundlesMixin());
 
-        BundlesPool::setPoolPath(__DIR__ . '/../addons', BundlesPool::LEVELONE);
+        BundlesPool::setPoolPath(__DIR__ . '/../../../addons', BundlesPool::LEVELONE);
     }
 
     private function viewComponents(): array
