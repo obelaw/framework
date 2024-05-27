@@ -13,14 +13,16 @@ class Table
     public $grid = null;
     public $model = null;
     public $where = null;
+    public $whereSearch = null;
     public $filter = null;
     public $links = null;
 
-    public function __construct($grid, $model, $where = null)
+    public function __construct($grid, $model, $where = null, $whereSearch = null)
     {
         $this->grid = $grid;
         $this->model = $model;
         $this->where = $where;
+        $this->whereSearch = $whereSearch;
     }
 
     public function addColumn($label, $dataKey, $filter = null)
@@ -60,9 +62,6 @@ class Table
 
     public function getRows()
     {
-
-        // dd($this->grid, method_exists($this->grid, 'where'));
-
         $model = (new $this->model)->where(function (Builder $query) {
             if ($this->where) {
                 $query->where((new $this->where)->where($query));
@@ -70,6 +69,12 @@ class Table
 
             if (method_exists($this->grid, 'where')) {
                 $query->where($this->grid->where($query));
+            }
+        })->where(function (Builder $query) {
+            if ($this->whereSearch) {
+                // $columns = array_column($this->getDataKeys(), 'key');
+                $columns = (new $this->model)->getFillable();
+                $query->whereAny($columns, 'LIKE', '%' . $this->whereSearch . '%');
             }
         })->paginate(25);
 

@@ -19,6 +19,8 @@ abstract class GridRender extends Component
     use BootPermission;
     use WithPagination;
 
+    public $search = '';
+
     protected $pretitle = 'Pre Title';
     protected $title = 'Title';
     protected $paginationTheme = 'bootstrap';
@@ -30,24 +32,25 @@ abstract class GridRender extends Component
     {
         $this->bootPermission();
 
-        $grid = Bundles::getGrids($this->gridId);
+        // $grid = Bundles::getGrids($this->gridId);
 
-        $gridRender = new Grid($this);
-        $gridRender->setModel($grid['model']);
-        $gridRender->setWhere($grid['where']);
-        $gridRender->setBottoms($grid['buttons']);
-        $gridRender->setActions($grid['actions']);
+        // $gridRender = new Grid($this);
+        // $gridRender->setModel($grid['model']);
+        // $gridRender->setWhere($grid['where']);
+        // $gridRender->setBottoms($grid['buttons']);
+        // $gridRender->setActions($grid['actions']);
+        // $gridRender->whereSearch('s');
 
-        $tableRender = $gridRender->table();
-        $tableRender->setCTAs($grid['CTAs']);
-        $tableRender->initFilter($grid['filter']);
+        // $tableRender = $gridRender->table();
+        // $tableRender->setCTAs($grid['CTAs']);
+        // $tableRender->initFilter($grid['filter']);
 
-        foreach ($grid['rows'] as $row) {
-            $tableRender->addColumn($row['label'], $row['dataKey'], $row['filter']);
-        }
+        // foreach ($grid['rows'] as $row) {
+        //     $tableRender->addColumn($row['label'], $row['dataKey'], $row['filter']);
+        // }
 
-        $this->grid = $gridRender;
-        $this->tableRender = $tableRender;
+        // $this->grid = $gridRender;
+        // $this->tableRender = $tableRender;
     }
 
     public function preTitle()
@@ -62,6 +65,26 @@ abstract class GridRender extends Component
 
     public function render()
     {
+        $grid = Bundles::getGrids($this->gridId);
+
+        $gridRender = new Grid($this);
+        $gridRender->setModel($grid['model']);
+        $gridRender->setWhere($grid['where']);
+        $gridRender->setBottoms($grid['buttons']);
+        $gridRender->setActions($grid['actions']);
+        $gridRender->whereSearch($this->search);
+
+        $tableRender = $gridRender->table();
+        $tableRender->setCTAs($grid['CTAs']);
+        $tableRender->initFilter($grid['filter']);
+
+        foreach ($grid['rows'] as $row) {
+            $tableRender->addColumn($row['label'], $row['dataKey'], $row['filter']);
+        }
+
+        $this->grid = $gridRender;
+        $this->tableRender = $tableRender;
+
         return view('obelaw-ui::renderer.grid', [
             'pretitle' => $this->preTitle(),
             'title' => $this->title(),

@@ -70,6 +70,13 @@
     <div class="row row-cards">
         <div class="col-12">
             <div class="card mb-3">
+                <div class="card-header">
+                    <h3 class="card-title">{{ $title }}</h3>
+                    <div class="card-actions">
+                        <input type="search" class="form-control" wire:model.live="search"
+                            placeholder="Search...">
+                    </div>
+                </div>
 
                 @if ($table->getRows()->isEmpty())
                     <div class="empty">

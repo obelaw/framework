@@ -11,6 +11,7 @@ class Grid
 
     protected $model = null;
     protected $where = null;
+    protected $whereSearch = null;
 
     public function __construct(
         public Component $grid,
@@ -41,6 +42,13 @@ class Grid
         return $this;
     }
 
+    public function whereSearch($search)
+    {
+        $this->whereSearch = $search;
+
+        return $this;
+    }
+
     public function setBottoms($bottoms)
     {
         $this->bottoms = $bottoms;
@@ -53,6 +61,6 @@ class Grid
 
     public function table()
     {
-        return new Table($this->grid, $this->model, $this->where);
+        return new Table($this->grid, $this->model, $this->where, $this->whereSearch);
     }
 }
