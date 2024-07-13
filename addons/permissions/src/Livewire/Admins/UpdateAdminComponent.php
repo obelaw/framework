@@ -2,13 +2,13 @@
 
 namespace Obelaw\Permissions\Livewire\Admins;
 
-use Illuminate\Support\Facades\Hash;
+use Obelaw\Permissions\Actions\UpdateAdminAction;
 use Obelaw\Permissions\Attributes\Access;
-use Obelaw\Permissions\Models\Admin;
-use Obelaw\UI\Renderer\FormRender;
+use Obelaw\Permissions\Services\AdminService;
+use Obelaw\UI\Renderer\FormActionRender;
 
 #[Access('permissions_admin_update')]
-class UpdateAdminComponent extends FormRender
+class UpdateAdminComponent extends FormActionRender
 {
     public $formId = 'obelaw_helper_permissions_admin_update_form';
 
@@ -16,10 +16,11 @@ class UpdateAdminComponent extends FormRender
 
     protected $pretitle = 'Permissions';
     protected $title = 'Create Update This Admin';
+    protected $actionClass = UpdateAdminAction::class;
 
-    public function mount(Admin $admin)
+    public function mount($adminId)
     {
-        $this->admin = $admin;
+        $this->admin = $admin = AdminService::make()->getAdminById($adminId);
 
         $this->setInputs([
             'rule_id' => $admin->rule_id,
@@ -29,20 +30,10 @@ class UpdateAdminComponent extends FormRender
         ]);
     }
 
-    public function submit()
+    public function properties()
     {
-        $validateData = $this->getInputs();
-
-        if (isset($validateData['password'])) {
-            $validateData['password'] = Hash::make($validateData['password']);
-        } else {
-            unset($validateData['password']);
-        }
-
-        $this->admin->update($validateData);
-
-        $this->pushAlert('success', 'The admin has been updated');
-
-        return redirect()->route('obelaw.permissions.admins.index');
+        return [
+            'admin' => $this->admin,
+        ];
     }
 }

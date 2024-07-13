@@ -27,7 +27,7 @@ Route::prefix('permissions')->group(function () {
     Route::prefix('admins')->group(function () {
         Route::get('/', IndexAdminsComponent::class)->name('obelaw.permissions.admins.index');
         Route::get('/create', CreateAdminComponent::class)->name('obelaw.permissions.admins.create');
-        Route::get('/{admin}/update', UpdateAdminComponent::class)->name('obelaw.permissions.admins.update');
+        Route::get('/{adminId}/update', UpdateAdminComponent::class)->name('obelaw.permissions.admins.update');
     });
 
     Route::prefix('rules')->group(function () {
