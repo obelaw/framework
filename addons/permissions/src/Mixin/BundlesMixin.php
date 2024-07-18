@@ -7,9 +7,7 @@ class BundlesMixin
     public function getACls()
     {
         return function () {
-            $ACLs = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawACLs');
+            $ACLs = $this->getDriver()->get('obelawACLs');
 
             return $this->BundlesDisable($ACLs);
         };

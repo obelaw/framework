@@ -7,9 +7,7 @@ class BundlesMixin
     public function getAtInstalls()
     {
         return function () {
-            return $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawInstall');
+            return $this->getDriver()->get('obelawInstall');
         };
     }
 }

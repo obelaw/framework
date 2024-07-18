@@ -7,9 +7,7 @@ class BundlesMixin
     public function getForms()
     {
         return function ($id = null) {
-            $forms = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawForms');
+            $forms = $this->getDriver()->get('obelawForms');
 
             if (!is_null($id)) {
                 return $forms[$id] ?? null;
@@ -43,9 +41,7 @@ class BundlesMixin
     public function getGrids()
     {
         return function ($id = null) {
-            $grids = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawGrids');
+            $grids = $this->getDriver()->get('obelawGrids');
 
             if (!is_null($id)) {
                 return $grids[$id] ?? null;
@@ -58,9 +54,7 @@ class BundlesMixin
     public function getViews()
     {
         return function ($id = null) {
-            $views = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawViews');
+            $views = $this->getDriver()->get('obelawViews');
 
             if (!is_null($id)) {
                 return $views[$id] ?? null;
@@ -73,9 +67,7 @@ class BundlesMixin
     public function getWidgets()
     {
         return function ($id = null) {
-            $Widgets = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawWidgets');
+            $Widgets = $this->getDriver()->get('obelawWidgets');
 
             if (!is_null($id)) {
                 return $Widgets[$id] ?? null;
@@ -88,9 +80,7 @@ class BundlesMixin
     public function getDashboardRoutes()
     {
         return function () {
-            $routes = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawDashboardRoutes');
+            $routes = $this->getDriver()->get('obelawDashboardRoutes');
 
             return $this->BundlesDisable($routes);
         };
@@ -99,9 +89,7 @@ class BundlesMixin
     public function getApiRoutes()
     {
         return function () {
-            $routes = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawApiRoutes');
+            $routes = $this->getDriver()->get('obelawApiRoutes');
 
             return $this->BundlesDisable($routes);
         };
@@ -110,9 +98,7 @@ class BundlesMixin
     public function getNavbars()
     {
         return function ($id = null) {
-            $navbars = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawNavbars');
+            $navbars = $this->getDriver()->get('obelawNavbars');
 
             $navbars = $this->BundlesDisable($navbars);
 
@@ -127,9 +113,7 @@ class BundlesMixin
     public function getACLs()
     {
         return function () {
-            $ACLs = $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawACLs');
+            $ACLs = $this->getDriver()->get('obelawACLs');
 
             return $this->BundlesDisable($ACLs);
         };
@@ -138,9 +122,7 @@ class BundlesMixin
     public function getMigrations()
     {
         return function () {
-            return $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawMigration');
+            return $this->getDriver()->get('obelawMigration');
         };
     }
 
@@ -148,18 +130,14 @@ class BundlesMixin
     public function getSeeds()
     {
         return function () {
-            return $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawSeeds');
+            return $this->getDriver()->get('obelawSeeds');
         };
     }
 
     public function getConfigurations()
     {
         return function () {
-            return $this->driver
-                ->setPrefix($this->getCachePrefix())
-                ->get('obelawConfigurations');
+            return $this->getDriver()->get('obelawConfigurations');
         };
     }
 }
