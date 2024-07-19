@@ -2,14 +2,13 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Compiles\Scan\Modules\RoutesDashboardCompile;
 
 class RoutesDashboardPluginCompile extends RoutesDashboardCompile
 {
     public function scanner($paths)
     {
-        $this->routes = Bundles::getDashboardRoutes();
+        $this->routes = $this->driver->get('obelawDashboardRoutes');
 
         $outRoutes = [];
         foreach ($paths as $id => $path) {
@@ -20,6 +19,6 @@ class RoutesDashboardPluginCompile extends RoutesDashboardCompile
             }
         }
 
-        return array_merge(Bundles::getDashboardRoutes(), $outRoutes);
+        return array_merge($this->routes, $outRoutes);
     }
 }

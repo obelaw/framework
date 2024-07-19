@@ -2,7 +2,6 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\Navbar\Links;
 use Obelaw\UI\Compiles\Scan\Modules\NavbarCompile;
 
@@ -10,7 +9,7 @@ class NavbarPluginCompile extends NavbarCompile
 {
     public function scanner($paths)
     {
-        $outNavbars = Bundles::getNavbars();
+        $outNavbars = $this->driver->get('obelawNavbars');
 
         foreach ($paths as $id => $path) {
             $pathNavbarFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'navbar.php';

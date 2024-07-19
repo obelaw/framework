@@ -2,7 +2,6 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\View\Button;
 use Obelaw\UI\Schema\View\Tabs;
 use Obelaw\UI\Compiles\Scan\Modules\ViewsCompile;
@@ -11,7 +10,7 @@ class ViewsPluginCompile extends ViewsCompile
 {
     public function scanner($paths)
     {
-        $outViews = Bundles::getViews();
+        $outViews = $this->driver->get('obelawViews');
 
         foreach ($paths as $id => $path) {
             $_view = [];

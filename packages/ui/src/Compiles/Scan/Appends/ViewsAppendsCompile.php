@@ -3,7 +3,6 @@
 namespace Obelaw\UI\Compiles\Scan\Appends;
 
 use Illuminate\Console\OutputStyle;
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\View\Button;
 use Obelaw\UI\Schema\View\Tabs;
 use Obelaw\UI\Compiles\Scan\Modules\ViewsCompile;
@@ -13,8 +12,6 @@ class ViewsAppendsCompile extends ViewsCompile
     public function scanner($paths, OutputStyle $consoleOutput = null)
     {
         $outViews = [];
-
-        // $consoleOutput?->writeln('Views Appends Compile...');
 
         foreach ($paths as $id => $path) {
             $_view = [];
@@ -47,10 +44,8 @@ class ViewsAppendsCompile extends ViewsCompile
             }
         }
 
-        // $consoleOutput?->writeln('Views Appends Compiled.');
-
         $append = [];
-        foreach (Bundles::getViews() as $id => $view) {
+        foreach ($this->driver->get('obelawViews') as $id => $view) {
             if (isset($outViews[$id])) {
 
                 if (isset($outViews[$id]['tabs'])) {
@@ -68,9 +63,6 @@ class ViewsAppendsCompile extends ViewsCompile
                 $append[$id] = $view;
             }
         }
-
-        // dd($append);
-        // dd(Bundles::getViews(), $append);
 
         return $append;
     }

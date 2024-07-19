@@ -3,7 +3,6 @@
 namespace Obelaw\UI\Compiles\Scan\Appends;
 
 use Illuminate\Console\OutputStyle;
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\Navbar\Links;
 use Obelaw\UI\Compiles\Scan\Modules\NavbarCompile;
 
@@ -11,7 +10,7 @@ class NavbarAppendsCompile extends NavbarCompile
 {
     public function scanner($paths, OutputStyle $consoleOutput = null)
     {
-        $outNavbars = Bundles::getNavbars();
+        $outNavbars = $this->driver->get('obelawNavbars');
 
         foreach ($paths as $id => $path) {
             $_outNavbars = [];

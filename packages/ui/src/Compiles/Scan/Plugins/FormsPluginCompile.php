@@ -2,7 +2,6 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\Form\Action;
 use Obelaw\UI\Schema\Form\Fields;
 use Obelaw\UI\Compiles\Scan\Modules\FormsCompile;
@@ -11,7 +10,7 @@ class FormsPluginCompile extends FormsCompile
 {
     public function scanner($paths)
     {
-        $outForms = Bundles::getForms();
+        $outForms = $this->driver->get('obelawForms');
 
         foreach ($paths as $id => $path) {
             $_form = [];

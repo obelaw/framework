@@ -2,7 +2,6 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Schema\Grid\Action;
 use Obelaw\UI\Schema\Grid\Button;
 use Obelaw\UI\Schema\Grid\CTA;
@@ -13,7 +12,7 @@ class GridsPluginCompile extends GridsCompile
 {
     public function scanner($paths)
     {
-        $outGrids = Bundles::getGrids();
+        $outGrids = $this->driver->get('obelawGrids');
 
         foreach ($paths as $id => $path) {
             $_grid = [];

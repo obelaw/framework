@@ -2,7 +2,6 @@
 
 namespace Obelaw\UI\Compiles\Scan\Plugins;
 
-use Obelaw\Facades\Bundles;
 use Obelaw\UI\Compiles\Scan\Modules\RoutesApiCompile;
 
 class RoutesApiPluginCompile extends RoutesApiCompile
@@ -13,7 +12,7 @@ class RoutesApiPluginCompile extends RoutesApiCompile
     {
         $route[$id] = $path;
 
-        $this->routes = array_merge(Bundles::getApiRoutes(), $route);
+        $this->routes = array_merge($this->driver->get('obelawApiRoutes'), $route);
     }
 
     private function getRoutes()
@@ -23,7 +22,7 @@ class RoutesApiPluginCompile extends RoutesApiCompile
 
     public function scanner($paths)
     {
-        $this->routes = Bundles::getApiRoutes();
+        $this->routes = $this->driver->get('obelawApiRoutes');
 
         foreach ($paths as $id => $path) {
             $pathRoutesFile = $path . DIRECTORY_SEPARATOR . 'etc' . DIRECTORY_SEPARATOR . 'routes' . DIRECTORY_SEPARATOR . 'api.php';
